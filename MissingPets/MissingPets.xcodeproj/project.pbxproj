@@ -9,21 +9,33 @@
 /* Begin PBXBuildFile section */
 		9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6A42835156D009E7BE0 /* AppDelegate.swift */; };
 		9A1AC6A72835156D009E7BE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6A62835156D009E7BE0 /* SceneDelegate.swift */; };
-		9A1AC6A92835156D009E7BE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6A82835156D009E7BE0 /* ViewController.swift */; };
+		9A1AC6A92835156D009E7BE0 /* AddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6A82835156D009E7BE0 /* AddController.swift */; };
 		9A1AC6AC2835156D009E7BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1AC6AA2835156D009E7BE0 /* Main.storyboard */; };
 		9A1AC6AE28351574009E7BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1AC6AD28351574009E7BE0 /* Assets.xcassets */; };
 		9A1AC6B128351574009E7BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1AC6AF28351574009E7BE0 /* LaunchScreen.storyboard */; };
+		9A1AC6BA28351754009E7BE0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6B928351754009E7BE0 /* TabBarController.swift */; };
+		9A1AC6BC283518AC009E7BE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BB283518AC009E7BE0 /* MainController.swift */; };
+		9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */; };
+		9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BF283519CC009E7BE0 /* MapController.swift */; };
+		D4C5EFB179710908F1FD800A /* Pods_MissingPets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CE62B00339BDAF0A3F87B /* Pods_MissingPets.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B6CA5C173E5436063A67EED /* Pods-MissingPets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissingPets.debug.xcconfig"; path = "Target Support Files/Pods-MissingPets/Pods-MissingPets.debug.xcconfig"; sourceTree = "<group>"; };
+		457CE62B00339BDAF0A3F87B /* Pods_MissingPets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MissingPets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1AC6A12835156D009E7BE0 /* MissingPets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissingPets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1AC6A42835156D009E7BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A1AC6A62835156D009E7BE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9A1AC6A82835156D009E7BE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9A1AC6A82835156D009E7BE0 /* AddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddController.swift; sourceTree = "<group>"; };
 		9A1AC6AB2835156D009E7BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A1AC6AD28351574009E7BE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A1AC6B028351574009E7BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A1AC6B228351574009E7BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A1AC6B928351754009E7BE0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		9A1AC6BB283518AC009E7BE0 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		9A1AC6BF283519CC009E7BE0 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		D52BD67C4132EB292A37D642 /* Pods-MissingPets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissingPets.release.xcconfig"; path = "Target Support Files/Pods-MissingPets/Pods-MissingPets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +43,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C5EFB179710908F1FD800A /* Pods_MissingPets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F15B138264021E2E14CA271 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1B6CA5C173E5436063A67EED /* Pods-MissingPets.debug.xcconfig */,
+				D52BD67C4132EB292A37D642 /* Pods-MissingPets.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9A1AC6982835156C009E7BE0 = {
 			isa = PBXGroup;
 			children = (
 				9A1AC6A32835156D009E7BE0 /* MissingPets */,
 				9A1AC6A22835156D009E7BE0 /* Products */,
+				5F15B138264021E2E14CA271 /* Pods */,
+				DA5C27C82A2A540240B572F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,13 +82,33 @@
 			children = (
 				9A1AC6A42835156D009E7BE0 /* AppDelegate.swift */,
 				9A1AC6A62835156D009E7BE0 /* SceneDelegate.swift */,
-				9A1AC6A82835156D009E7BE0 /* ViewController.swift */,
+				9A1AC6B82835173D009E7BE0 /* Controllers */,
 				9A1AC6AA2835156D009E7BE0 /* Main.storyboard */,
 				9A1AC6AD28351574009E7BE0 /* Assets.xcassets */,
 				9A1AC6AF28351574009E7BE0 /* LaunchScreen.storyboard */,
 				9A1AC6B228351574009E7BE0 /* Info.plist */,
 			);
 			path = MissingPets;
+			sourceTree = "<group>";
+		};
+		9A1AC6B82835173D009E7BE0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9A1AC6B928351754009E7BE0 /* TabBarController.swift */,
+				9A1AC6BB283518AC009E7BE0 /* MainController.swift */,
+				9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */,
+				9A1AC6BF283519CC009E7BE0 /* MapController.swift */,
+				9A1AC6A82835156D009E7BE0 /* AddController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DA5C27C82A2A540240B572F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				457CE62B00339BDAF0A3F87B /* Pods_MissingPets.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +118,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9A1AC6B528351574009E7BE0 /* Build configuration list for PBXNativeTarget "MissingPets" */;
 			buildPhases = (
+				248FCE13B2E6FBB95BDB31E9 /* [CP] Check Pods Manifest.lock */,
 				9A1AC69D2835156C009E7BE0 /* Sources */,
 				9A1AC69E2835156C009E7BE0 /* Frameworks */,
 				9A1AC69F2835156C009E7BE0 /* Resources */,
+				4E804D367E64C1EDD774CB4F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,14 +179,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		248FCE13B2E6FBB95BDB31E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MissingPets-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E804D367E64C1EDD774CB4F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MissingPets/Pods-MissingPets-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MissingPets/Pods-MissingPets-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MissingPets/Pods-MissingPets-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9A1AC69D2835156C009E7BE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A1AC6A92835156D009E7BE0 /* ViewController.swift in Sources */,
+				9A1AC6A92835156D009E7BE0 /* AddController.swift in Sources */,
+				9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */,
+				9A1AC6BA28351754009E7BE0 /* TabBarController.swift in Sources */,
 				9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */,
 				9A1AC6A72835156D009E7BE0 /* SceneDelegate.swift in Sources */,
+				9A1AC6BC283518AC009E7BE0 /* MainController.swift in Sources */,
+				9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +374,7 @@
 		};
 		9A1AC6B628351574009E7BE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B6CA5C173E5436063A67EED /* Pods-MissingPets.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -292,7 +385,6 @@
 				INFOPLIST_FILE = MissingPets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -311,6 +403,7 @@
 		};
 		9A1AC6B728351574009E7BE0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D52BD67C4132EB292A37D642 /* Pods-MissingPets.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -321,7 +414,6 @@
 				INFOPLIST_FILE = MissingPets/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

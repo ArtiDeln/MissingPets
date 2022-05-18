@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainController.swift
 //  MissingPets
 //
 //  Created by Artyom Butorin on 18.05.22.
@@ -7,13 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
     }
-
-
 }
-
