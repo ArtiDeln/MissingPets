@@ -12,21 +12,28 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.barTintColor = .yellow
+        tabBar.backgroundColor = .systemBackground
+//        tabBar.barTintColor = .systemOrange
+        self.setupTabBar()
         
-        let mainVC = MainVC()
-        let addPetVC = AddPetVC()
-        let mapVC = MapVC()
-        let testVC = TestController()
-        let profileVC = ProfileController()
+    }
+    
+    func setupTabBar() {
+        let mainVC = createNavController(vc: MainVC(), itemName: "Пропали", iconName: "square.stack")
+        let addPetVC = createNavController(vc: AddPetVC(), itemName: "", iconName: "plus.circle")
+        let mapVC = createNavController(vc: MapVC(), itemName: "Карта", iconName: "map")
+        let testVC = createNavController(vc: TestController(), itemName: "Найдены", iconName: "person.2.crop.square.stack")
+        let profileVC = createNavController(vc: ProfileVC(), itemName: "Профиль", iconName: "person.crop.circle")
+        self.setViewControllers([mainVC, testVC, addPetVC, profileVC, mapVC], animated: true)
+    }
+    
+    func createNavController(vc: UIViewController, itemName: String, iconName: String) -> UINavigationController {
+        let item = UITabBarItem(title: itemName, image: UIImage(systemName: iconName), tag: 0)
+//        item.titlePositionAdjustment = .init(horizontal: 0, vertical: 10)
         
-        mainVC.tabBarItem.image = UIImage(systemName: "square.stack")
-        addPetVC.tabBarItem.image = UIImage(systemName: "plus.circle")
-        mapVC.tabBarItem.image = UIImage(systemName: "map")
-        testVC.tabBarItem.image = UIImage(systemName: "person.2.crop.square.stack")
-        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle")
-        
-        self.setViewControllers([mainVC, testVC, addPetVC, profileVC, mapVC], animated: false)
+        let navController = UINavigationController(rootViewController: vc)
+        navController.tabBarItem = item
+        return navController
     }
 }
 

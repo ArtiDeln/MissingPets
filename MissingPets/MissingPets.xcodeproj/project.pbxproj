@@ -17,6 +17,7 @@
 		9A1AC6BC283518AC009E7BE0 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BB283518AC009E7BE0 /* MainController.swift */; };
 		9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */; };
 		9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BF283519CC009E7BE0 /* MapController.swift */; };
+		9AA4361B283A966A00E678D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */; };
 		D4C5EFB179710908F1FD800A /* Pods_MissingPets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CE62B00339BDAF0A3F87B /* Pods_MissingPets.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		9A1AC6BB283518AC009E7BE0 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9A1AC6BF283519CC009E7BE0 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D52BD67C4132EB292A37D642 /* Pods-MissingPets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissingPets.release.xcconfig"; path = "Target Support Files/Pods-MissingPets/Pods-MissingPets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,9 +86,7 @@
 				9A1AC6A62835156D009E7BE0 /* SceneDelegate.swift */,
 				9A1AC6B82835173D009E7BE0 /* Controllers */,
 				9A1AC6AA2835156D009E7BE0 /* Main.storyboard */,
-				9A1AC6AD28351574009E7BE0 /* Assets.xcassets */,
-				9A1AC6AF28351574009E7BE0 /* LaunchScreen.storyboard */,
-				9A1AC6B228351574009E7BE0 /* Info.plist */,
+				9AF0A8E02835591D00B04DBC /* Resources */,
 			);
 			path = MissingPets;
 			sourceTree = "<group>";
@@ -101,6 +101,17 @@
 				9A1AC6A82835156D009E7BE0 /* AddController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9AF0A8E02835591D00B04DBC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9A1AC6AD28351574009E7BE0 /* Assets.xcassets */,
+				9A1AC6AF28351574009E7BE0 /* LaunchScreen.storyboard */,
+				9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */,
+				9A1AC6B228351574009E7BE0 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		DA5C27C82A2A540240B572F9 /* Frameworks */ = {
@@ -172,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1AC6B128351574009E7BE0 /* LaunchScreen.storyboard in Resources */,
+				9AA4361B283A966A00E678D3 /* GoogleService-Info.plist in Resources */,
 				9A1AC6AE28351574009E7BE0 /* Assets.xcassets in Resources */,
 				9A1AC6AC2835156D009E7BE0 /* Main.storyboard in Resources */,
 			);
@@ -382,7 +394,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5NH63BJNFG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MissingPets/Info.plist;
+				INFOPLIST_FILE = MissingPets/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -411,7 +423,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5NH63BJNFG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MissingPets/Info.plist;
+				INFOPLIST_FILE = MissingPets/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

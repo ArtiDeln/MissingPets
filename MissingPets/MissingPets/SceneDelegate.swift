@@ -6,6 +6,7 @@
 //
 
 import UIKit
+//import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,12 +15,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         
+//        let contentView = ContentView()
+
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = TabBarController()
+//        window?.rootViewController = UIHostingController(rootView: contentView)
+
         window?.makeKeyAndVisible()
     }
+    
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let _ = (scene as? UIWindowScene) else { return }
+//
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//        window?.windowScene = windowScene
+//        let mainController = TabBarController()
+//        let mainController2 = UINavigationController(rootViewController: mainController)
+//        window?.rootViewController = mainController2
+//        window?.makeKeyAndVisible()
+//    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
     }

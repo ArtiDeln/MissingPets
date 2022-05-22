@@ -19,13 +19,19 @@ class MapVC: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.backgroundColor = .systemBackground
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+
+        self.navigationItem.title = "Карта ветклиник"
         self.view.addSubview(self.mapView)
         self.mapView.delegate = self
 
         self.mapView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+//            $0.edges.equalToSuperview()
+            $0.edges.equalTo(self.view)
         }
     }
+    
 }
 
 extension MapVC: CLLocationManagerDelegate {

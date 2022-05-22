@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>14347205470-onn9931mpfra0tehkomnu6bb1jf41iv6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.14347205470-onn9931mpfra0tehkomnu6bb1jf41iv6</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>14347205470-h69m6dk67lo4dbqqrito6lhtmhj185es.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDufC39EzuoOBX4cR45dviB2rxpuk4BC8Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>14347205470</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Butorin.MissingPets</string>
+	<key>PROJECT_ID</key>
+	<string>diplomapp-1ee0a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>diplomapp-1ee0a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:14347205470:ios:2c412ed008b7eb67b82dcf</string>
+	<key>DATABASE_URL</key>
+	<string>https://diplomapp-1ee0a-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
