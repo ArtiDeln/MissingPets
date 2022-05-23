@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainVC: UIViewController {
+class MissingPetsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

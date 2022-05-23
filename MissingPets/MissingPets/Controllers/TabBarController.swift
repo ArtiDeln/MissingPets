@@ -19,10 +19,10 @@ class TabBarController: UITabBarController {
     }
     
     func setupTabBar() {
-        let mainVC = createNavController(vc: MainVC(), itemName: "Пропали", iconName: "square.stack")
+        let mainVC = createNavController(vc: MissingPetsVC(), itemName: "Пропали", iconName: "square.stack")
         let addPetVC = createNavController(vc: AddPetVC(), itemName: "", iconName: "plus.circle")
         let mapVC = createNavController(vc: MapVC(), itemName: "Карта", iconName: "map")
-        let testVC = createNavController(vc: TestController(), itemName: "Найдены", iconName: "person.2.crop.square.stack")
+        let testVC = createNavController(vc: FoundPetsVC(), itemName: "Найдены", iconName: "person.2.crop.square.stack")
         let profileVC = createNavController(vc: ProfileVC(), itemName: "Профиль", iconName: "person.crop.circle")
         self.setViewControllers([mainVC, testVC, addPetVC, profileVC, mapVC], animated: true)
     }
@@ -34,14 +34,5 @@ class TabBarController: UITabBarController {
         let navController = UINavigationController(rootViewController: vc)
         navController.tabBarItem = item
         return navController
-    }
-}
-
-import UIKit
-
-class TestController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
     }
 }

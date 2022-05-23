@@ -1,15 +1,17 @@
-////
-////  ProfileController.swift
-////  MissingPets
-////
-////  Created by Artyom Butorin on 18.05.22.
-////
+//
+//  AuthController.swift
+//  MissingPets
+//
+//  Created by Artyom Butorin on 23.05.22.
+//
 
 import UIKit
 import FirebaseAuth
 
-class ProfileVC: UIViewController {
+class AuthVC: UIViewController, UITextFieldDelegate {
 
+    //MARK: - GUI
+    
     let startLabel: UILabel = {
         let label = UILabel()
         label.text = "Вход"
@@ -54,14 +56,14 @@ class ProfileVC: UIViewController {
         return label
     }()
 
+    
+    
+    //MARK: - Initialisation
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .systemBackground
-
-        self.navigationController?.view.backgroundColor = .darkGray
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Profile"
 
         self.view.addSubview(self.startLabel)
         self.view.addSubview(self.emailField)
@@ -71,8 +73,14 @@ class ProfileVC: UIViewController {
         self.view.addSubview(self.questionLabel)
         
         self.logInBtn.addTarget(self, action: #selector(didTapLogInBtn), for: .touchUpInside)
+        
+//        self.emailField.delegate = self
+//        self.passwordField.delegate = self
 
         self.constraints()
+        
+        self.setupHideKeyboardOnTap()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,15 +88,17 @@ class ProfileVC: UIViewController {
         emailField.becomeFirstResponder()
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//    }
+    //MARK: - objc func
     
     @objc private func didTapLogInBtn() {
         print("Test")
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
             print("Missing field")
+            let alert = UIAlertController(title: "Заполните все поля", message: nil, preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(action)
+            self.present(alert, animated: true)
             return
         }
         
@@ -101,12 +111,21 @@ class ProfileVC: UIViewController {
                 return
             }
             print("вы вошли")
+            let test = MapVC()
+            test.modalPresentationStyle = .fullScreen
+
             strongSelf.emailField.isHidden = true
+//            strongSelf.present(test, animated: true)
 //            strongSelf.passwordField.isHidden = true
 //            strongSelf.logInBtn.isHidden = true
 //            strongSelf.signInBtn.isHidden = true
         })
     }
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        self.view.endEditing(true)
+//        return false
+//    }
     
     func showCreateAccount(email: String, password: String) {
         let alert = UIAlertController(title: "Create Account", message: "Создать аккаунт?", preferredStyle: .alert)
@@ -133,6 +152,8 @@ class ProfileVC: UIViewController {
         present(alert, animated: true)
     }
 
+    //MARK: - Constraints
+    
     private func constraints() {
         self.startLabel.snp.makeConstraints {
             $0.centerX.equalTo(self.view)
@@ -158,5 +179,21 @@ class ProfileVC: UIViewController {
             $0.left.right.equalToSuperview().inset(90)
             $0.top.equalTo(questionLabel.snp.bottom).inset(-15)
         }
+    }
+}
+
+extension UIViewController {
+    
+    //MARK: - Hide keyboard
+    
+    func setupHideKeyboardOnTap() {
+        self.view.addGestureRecognizer(self.endEditingRecognizer())
+        self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
+    }
+
+    private func endEditingRecognizer() -> UIGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        return tap
     }
 }
