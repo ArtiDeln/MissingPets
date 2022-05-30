@@ -12,18 +12,32 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.backgroundColor = .systemBackground
+        self.tabBar.backgroundColor = .systemBackground
+//        self.tabBar.isTranslucent = false
 //        tabBar.barTintColor = .systemOrange
+//        tabBar.barTintColor = .purple
+//        tabBar.isTranslucent = false
         self.setupTabBar()
+//        self.tabBar.isTranslucent = true
         
     }
     
     func setupTabBar() {
-        let mainVC = createNavController(vc: MissingPetsVC(), itemName: "Пропали", iconName: "square.stack")
-        let addPetVC = createNavController(vc: AddPetVC(), itemName: "", iconName: "plus.circle")
-        let mapVC = createNavController(vc: MapVC(), itemName: "Карта", iconName: "map")
-        let testVC = createNavController(vc: FoundPetsVC(), itemName: "Найдены", iconName: "person.2.crop.square.stack")
-        let profileVC = createNavController(vc: ProfileVC(), itemName: "Профиль", iconName: "person.crop.circle")
+        let mainVC = createNavController(vc: MissingPetsVC(),
+                                         itemName: "Пропали",
+                                         iconName: "pawprint")
+        let testVC = createNavController(vc: FoundPetsVC(),
+                                         itemName: "Найдены",
+                                         iconName: "pawprint.fill")
+        let addPetVC = createNavController(vc: AddPetVC(),
+                                           itemName: "",
+                                           iconName: "plus.circle")
+        let profileVC = createNavController(vc: ProfileVC(),
+                                            itemName: "Профиль",
+                                            iconName: "person.crop.square.fill")
+        let mapVC = createNavController(vc: MapVC(),
+                                        itemName: "Карта",
+                                        iconName: "map.fill")
         self.setViewControllers([mainVC, testVC, addPetVC, profileVC, mapVC], animated: true)
     }
     

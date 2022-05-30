@@ -18,6 +18,8 @@
 		9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */; };
 		9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BF283519CC009E7BE0 /* MapController.swift */; };
 		9A70E610283B001400D03B92 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70E60F283B001400D03B92 /* AuthController.swift */; };
+		9AA3B94128442CBB0034CC1B /* VetMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3B94028442CBB0034CC1B /* VetMap.swift */; };
+		9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3B94228442DB40034CC1B /* VetsModel.swift */; };
 		9AA4361B283A966A00E678D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */; };
 		9AA4361D283AE50400E678D3 /* FoundPetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA4361C283AE50400E678D3 /* FoundPetsController.swift */; };
 		D4C5EFB179710908F1FD800A /* Pods_MissingPets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CE62B00339BDAF0A3F87B /* Pods_MissingPets.framework */; };
@@ -39,6 +41,8 @@
 		9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9A1AC6BF283519CC009E7BE0 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		9A70E60F283B001400D03B92 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		9AA3B94028442CBB0034CC1B /* VetMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetMap.swift; sourceTree = "<group>"; };
+		9AA3B94228442DB40034CC1B /* VetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetsModel.swift; sourceTree = "<group>"; };
 		9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9AA4361C283AE50400E678D3 /* FoundPetsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundPetsController.swift; sourceTree = "<group>"; };
 		D52BD67C4132EB292A37D642 /* Pods-MissingPets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissingPets.release.xcconfig"; path = "Target Support Files/Pods-MissingPets/Pods-MissingPets.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 			children = (
 				9A70E611283B002300D03B92 /* TabBarControllers */,
 				9A70E60F283B001400D03B92 /* AuthController.swift */,
+				9AA3B94028442CBB0034CC1B /* VetMap.swift */,
+				9AA3B94228442DB40034CC1B /* VetsModel.swift */,
 				9A1AC6B928351754009E7BE0 /* TabBarController.swift */,
 			);
 			path = Controllers;
@@ -264,6 +270,8 @@
 				9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */,
 				9A1AC6BA28351754009E7BE0 /* TabBarController.swift in Sources */,
 				9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */,
+				9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */,
+				9AA3B94128442CBB0034CC1B /* VetMap.swift in Sources */,
 				9A70E610283B001400D03B92 /* AuthController.swift in Sources */,
 				9A1AC6A72835156D009E7BE0 /* SceneDelegate.swift in Sources */,
 				9AA4361D283AE50400E678D3 /* FoundPetsController.swift in Sources */,
