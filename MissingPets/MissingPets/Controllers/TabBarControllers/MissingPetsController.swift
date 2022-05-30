@@ -11,10 +11,8 @@ class MissingPetsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Пропавшие животные"
+        view.backgroundColor = .systemOrange
+//        self.navigationItem.title = "Пропали"
 //        title = "aaa"
         
 //        let segmentControl: UISegmentedControl = {

@@ -21,8 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                if ((user) != nil) {
                    print("User logged in")
                    let home = TabBarController()
-                   
-//                   let home = self?.window?.rootViewController as? TabBarController()
                    self?.window?.rootViewController = home
                  
                } else {

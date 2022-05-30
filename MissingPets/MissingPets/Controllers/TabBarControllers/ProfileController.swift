@@ -25,7 +25,7 @@ class ProfileVC: UIViewController {
         logOut.backgroundColor = .systemGray
         logOut.layer.cornerRadius = 10
         logOut.titleLabel?.font = .systemFont(ofSize: 12)
-        logOut.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
+        logOut.addTarget(ProfileVC.self, action: #selector(logOutTapped), for: .touchUpInside)
         return logOut
     }()
     

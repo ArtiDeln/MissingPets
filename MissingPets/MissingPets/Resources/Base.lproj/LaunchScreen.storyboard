@@ -16,12 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8kl-YW-dfW">
+                                <rect key="frame" x="103" y="387" width="208" height="122"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="MissingPets">
+                                        <attributes>
+                                            <font key="NSFont" size="39" name="Optima-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngh-CY-vw5">
                                 <rect key="frame" x="118" y="669" width="179" height="62"/>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">Разработка: Буторин А.А.
-г. Гомель, ГГУ, 2022г.</string>
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="15" name="Helvetica-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="г. Гомель, ГГУ, 2022г.">
                                         <attributes>
                                             <font key="NSFont" size="15" name="Helvetica-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -30,19 +49,14 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LounchScreenImage" translatesAutoresizingMaskIntoConstraints="NO" id="855-0l-hvk">
-                                <rect key="frame" x="54" y="-59" width="307" height="1024"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="855-0l-hvk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="54" id="Dbn-ir-M1T"/>
-                            <constraint firstItem="855-0l-hvk" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="IZR-8i-txG"/>
+                            <constraint firstItem="8kl-YW-dfW" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1vb-mh-oIy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ngh-CY-vw5" secondAttribute="bottom" constant="131" id="KKc-S7-4eu"/>
                             <constraint firstItem="ngh-CY-vw5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="S58-y7-uws"/>
-                            <constraint firstItem="855-0l-hvk" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="gqg-fh-Xek"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="855-0l-hvk" secondAttribute="trailing" constant="53" id="uJz-Wk-Aoo"/>
+                            <constraint firstItem="8kl-YW-dfW" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="eda-YM-Doh"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -52,7 +66,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LounchScreenImage" width="1024" height="1024"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

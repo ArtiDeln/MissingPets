@@ -7,19 +7,17 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseDatabase
 
 class AuthVC: UIViewController, UITextFieldDelegate {
-    
+
     //MARK: - GUI
     
     let startLabel: UILabel = {
         let label = UILabel()
         label.text = "Вход"
-        label.font = .boldSystemFont(ofSize: 45)
         return label
     }()
-    
+
     let emailField: UITextField = {
         let email = UITextField()
         email.borderStyle = .roundedRect
@@ -27,7 +25,7 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         email.autocapitalizationType = .none
         return email
     }()
-    
+
     let passwordField: UITextField = {
         let password = UITextField()
         password.borderStyle = .roundedRect
@@ -57,16 +55,16 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         label.text = "Нет аккаунта?"
         return label
     }()
-    
+
     
     
     //MARK: - Initialisation
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.view.backgroundColor = .systemBackground
-        
+
         self.view.addSubview(self.startLabel)
         self.view.addSubview(self.emailField)
         self.view.addSubview(self.passwordField)
@@ -76,13 +74,13 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         
         self.logInBtn.addTarget(self, action: #selector(didTapLogInBtn), for: .touchUpInside)
         
-        //        self.emailField.delegate = self
-        //        self.passwordField.delegate = self
-        
+//        self.emailField.delegate = self
+//        self.passwordField.delegate = self
+
         self.constraints()
         
         self.setupHideKeyboardOnTap()
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,23 +111,25 @@ class AuthVC: UIViewController, UITextFieldDelegate {
                 return
             }
             print("вы вошли")
-            
+            let test = MapVC()
+            test.modalPresentationStyle = .fullScreen
+
             strongSelf.emailField.isHidden = true
-            //            strongSelf.present(test, animated: true)
-            //            strongSelf.passwordField.isHidden = true
-            //            strongSelf.logInBtn.isHidden = true
-            //            strongSelf.signInBtn.isHidden = true
+//            strongSelf.present(test, animated: true)
+//            strongSelf.passwordField.isHidden = true
+//            strongSelf.logInBtn.isHidden = true
+//            strongSelf.signInBtn.isHidden = true
         })
     }
     
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        self.view.endEditing(true)
-    //        return false
-    //    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        self.view.endEditing(true)
+//        return false
+//    }
     
     func showCreateAccount(email: String, password: String) {
-        let alert = UIAlertController(title: "Учетная запись отсутствует", message: "Хотите создать аккаунт?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Создать", style: .default, handler: {_ in
+        let alert = UIAlertController(title: "Create Account", message: "Создать аккаунт?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Continue?", style: .default, handler: {_ in
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
                 guard let strongSelf = self else {
                     return
@@ -138,23 +138,20 @@ class AuthVC: UIViewController, UITextFieldDelegate {
                     print("Account created failed")
                     return
                 }
-                print(result?.user.uid ?? "error")
-                let ref = Database.database().reference().child("users")
-                
-                ref.child(result?.user.uid ?? "Error").updateChildValues(["email" : email])
                 print("вы вошли")
-                
                 strongSelf.emailField.isHidden = true
-                
+    //            strongSelf.passwordField.isHidden = true
+    //            strongSelf.logInBtn.isHidden = true
+    //            strongSelf.signInBtn.isHidden = true
             })
         }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: {_ in
+        alert.addAction(UIAlertAction(title: "Cancel?", style: .cancel, handler: {_ in
             
         }))
         
         present(alert, animated: true)
     }
-    
+
     //MARK: - Constraints
     
     private func constraints() {
@@ -193,7 +190,7 @@ extension UIViewController {
         self.view.addGestureRecognizer(self.endEditingRecognizer())
         self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
     }
-    
+
     private func endEditingRecognizer() -> UIGestureRecognizer {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
         tap.cancelsTouchesInView = false
