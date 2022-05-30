@@ -169,7 +169,6 @@ extension MapVC: MKMapViewDelegate {
         let render = MKPolylineRenderer(overlay: overlay)
         render.strokeColor = .blue
         render.lineWidth = 4
-        
         return render
     }
 }
