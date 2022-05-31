@@ -10,8 +10,11 @@ import SnapKit
 
 class TabBarController: UITabBarController {
     
+    //MARK: - Initialization
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tabBar.backgroundColor = .systemBackground
 //        self.tabBar.isTranslucent = false
 //        tabBar.barTintColor = .systemOrange
@@ -19,8 +22,9 @@ class TabBarController: UITabBarController {
 //        tabBar.isTranslucent = false
         self.setupTabBar()
 //        self.tabBar.isTranslucent = true
-        
     }
+    
+    //MARK: - Functions
     
     func setupTabBar() {
         let mainVC = createNavController(vc: MissingPetsVC(),
@@ -43,8 +47,6 @@ class TabBarController: UITabBarController {
     
     func createNavController(vc: UIViewController, itemName: String, iconName: String) -> UINavigationController {
         let item = UITabBarItem(title: itemName, image: UIImage(systemName: iconName), tag: 0)
-//        item.titlePositionAdjustment = .init(horizontal: 0, vertical: 10)
-        
         let navController = UINavigationController(rootViewController: vc)
         navController.tabBarItem = item
         return navController

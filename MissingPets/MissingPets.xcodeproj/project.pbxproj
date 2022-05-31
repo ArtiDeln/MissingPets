@@ -10,13 +10,15 @@
 		9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6A42835156D009E7BE0 /* AppDelegate.swift */; };
 		9A1AC6A72835156D009E7BE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6A62835156D009E7BE0 /* SceneDelegate.swift */; };
 		9A1AC6A92835156D009E7BE0 /* AddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6A82835156D009E7BE0 /* AddController.swift */; };
-		9A1AC6AC2835156D009E7BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1AC6AA2835156D009E7BE0 /* Main.storyboard */; };
 		9A1AC6AE28351574009E7BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1AC6AD28351574009E7BE0 /* Assets.xcassets */; };
 		9A1AC6B128351574009E7BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A1AC6AF28351574009E7BE0 /* LaunchScreen.storyboard */; };
 		9A1AC6BA28351754009E7BE0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6B928351754009E7BE0 /* TabBarController.swift */; };
 		9A1AC6BC283518AC009E7BE0 /* MissingPetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */; };
 		9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */; };
 		9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BF283519CC009E7BE0 /* MapController.swift */; };
+		9A4EBB9D28453BAF00BD41D4 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBB9C28453BAF00BD41D4 /* RegistrationController.swift */; };
+		9A4EBBA32845779500BD41D4 /* ProfileEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */; };
+		9A4EBBA528457C5D00BD41D4 /* MyAnnounsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */; };
 		9A70E610283B001400D03B92 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70E60F283B001400D03B92 /* AuthController.swift */; };
 		9AA3B94128442CBB0034CC1B /* VetMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3B94028442CBB0034CC1B /* VetMap.swift */; };
 		9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3B94228442DB40034CC1B /* VetsModel.swift */; };
@@ -32,7 +34,6 @@
 		9A1AC6A42835156D009E7BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A1AC6A62835156D009E7BE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9A1AC6A82835156D009E7BE0 /* AddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddController.swift; sourceTree = "<group>"; };
-		9A1AC6AB2835156D009E7BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A1AC6AD28351574009E7BE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A1AC6B028351574009E7BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A1AC6B228351574009E7BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,6 +41,9 @@
 		9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingPetsController.swift; sourceTree = "<group>"; };
 		9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9A1AC6BF283519CC009E7BE0 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		9A4EBB9C28453BAF00BD41D4 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditingController.swift; sourceTree = "<group>"; };
+		9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnounsController.swift; sourceTree = "<group>"; };
 		9A70E60F283B001400D03B92 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		9AA3B94028442CBB0034CC1B /* VetMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetMap.swift; sourceTree = "<group>"; };
 		9AA3B94228442DB40034CC1B /* VetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetsModel.swift; sourceTree = "<group>"; };
@@ -73,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				9A1AC6A32835156D009E7BE0 /* MissingPets */,
-				9A1AC6AA2835156D009E7BE0 /* Main.storyboard */,
 				9A1AC6A22835156D009E7BE0 /* Products */,
 				5F15B138264021E2E14CA271 /* Pods */,
 				DA5C27C82A2A540240B572F9 /* Frameworks */,
@@ -103,21 +106,40 @@
 			children = (
 				9A70E611283B002300D03B92 /* TabBarControllers */,
 				9A70E60F283B001400D03B92 /* AuthController.swift */,
-				9AA3B94028442CBB0034CC1B /* VetMap.swift */,
-				9AA3B94228442DB40034CC1B /* VetsModel.swift */,
-				9A1AC6B928351754009E7BE0 /* TabBarController.swift */,
+				9A4EBB9C28453BAF00BD41D4 /* RegistrationController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9A4EBB9E28453BB600BD41D4 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				9A1AC6BF283519CC009E7BE0 /* MapController.swift */,
+				9AA3B94028442CBB0034CC1B /* VetMap.swift */,
+				9AA3B94228442DB40034CC1B /* VetsModel.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		9A4EBBA12845772B00BD41D4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */,
+				9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */,
+				9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		9A70E611283B002300D03B92 /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A1AC6B928351754009E7BE0 /* TabBarController.swift */,
 				9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */,
 				9AA4361C283AE50400E678D3 /* FoundPetsController.swift */,
 				9A1AC6A82835156D009E7BE0 /* AddController.swift */,
-				9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */,
-				9A1AC6BF283519CC009E7BE0 /* MapController.swift */,
+				9A4EBBA12845772B00BD41D4 /* Profile */,
+				9A4EBB9E28453BB600BD41D4 /* Map */,
 			);
 			path = TabBarControllers;
 			sourceTree = "<group>";
@@ -213,7 +235,6 @@
 				9A1AC6B128351574009E7BE0 /* LaunchScreen.storyboard in Resources */,
 				9AA4361B283A966A00E678D3 /* GoogleService-Info.plist in Resources */,
 				9A1AC6AE28351574009E7BE0 /* Assets.xcassets in Resources */,
-				9A1AC6AC2835156D009E7BE0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,10 +293,13 @@
 				9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */,
 				9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */,
 				9AA3B94128442CBB0034CC1B /* VetMap.swift in Sources */,
+				9A4EBBA32845779500BD41D4 /* ProfileEditingController.swift in Sources */,
 				9A70E610283B001400D03B92 /* AuthController.swift in Sources */,
 				9A1AC6A72835156D009E7BE0 /* SceneDelegate.swift in Sources */,
+				9A4EBBA528457C5D00BD41D4 /* MyAnnounsController.swift in Sources */,
 				9AA4361D283AE50400E678D3 /* FoundPetsController.swift in Sources */,
 				9A1AC6BC283518AC009E7BE0 /* MissingPetsController.swift in Sources */,
+				9A4EBB9D28453BAF00BD41D4 /* RegistrationController.swift in Sources */,
 				9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,14 +307,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9A1AC6AA2835156D009E7BE0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9A1AC6AB2835156D009E7BE0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9A1AC6AF28351574009E7BE0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

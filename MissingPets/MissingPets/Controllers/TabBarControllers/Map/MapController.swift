@@ -10,20 +10,20 @@ import MapKit
 import SnapKit
 
 class MapVC: UIViewController {
-
+    
     //MARK: - GUI
     
-    private let mapView: MKMapView = {
-            let mapView = MKMapView()
-            mapView.translatesAutoresizingMaskIntoConstraints = false
-            return mapView
-        }()
-
+    private(set) var mapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        return mapView
+    }()
+    
     //MARK: - Constants
     
     let locationManager = CLLocationManager()
     
-    //MARK: - MapsMarks
+    //MARK: - MapsMarkers
     
     let modelVets = VetModel()
     
@@ -37,7 +37,7 @@ class MapVC: UIViewController {
         
         self.view.addSubview(self.mapView)
         self.mapView.delegate = self
-
+        
         self.constraints()
         
         for vet in modelVets.vets.first! {
@@ -46,73 +46,73 @@ class MapVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            checkLocationEnabled()
+        super.viewDidAppear(animated)
+        checkLocationEnabled()
+    }
+    
+    //MARK: - Location
+    
+    func checkLocationEnabled() {
+        if CLLocationManager.locationServicesEnabled() {
+            setupManager()
+            checkAuthorization()
+        } else {
+            showAlertLocation(title: "Служба геолокации выключена", message: "Хотите включить?", url: URL(string: "App-Prefs:root=LOCATION_SERVICES"))
+        }
+    }
+    
+    func setupManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func checkAuthorization() {
+        switch locationManager.authorizationStatus {
+        case .authorizedAlways:
+            break
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            showAlertLocation(title: "Вы запретили использование геолокации", message: "Хотите изменить?", url: URL(string: UIApplication.openSettingsURLString))
+            break
+        case .restricted:
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    func showAlertLocation(title: String, message: String?, url: URL?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let settingAction = UIAlertAction(title: "Настройки", style: .default) { (alert) in
+            if let url = url {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        
+        alert.addAction(settingAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     //MARK: - Constraints
-
+    
     private func constraints() {
         mapView.snp.makeConstraints {
             $0.edges.equalTo(self.view)
         }
     }
-
-    //MARK: - Location
     
-    func checkLocationEnabled() {
-            if CLLocationManager.locationServicesEnabled() {
-                setupManager()
-                checkAuthorization()
-            } else {
-                showAlertLocation(title: "Служба геолокации выключена", message: "Хотите включить?", url: URL(string: "App-Prefs:root=LOCATION_SERVICES"))
-            }
-        }
-
-        func setupManager() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        }
-
-        func checkAuthorization() {
-            switch locationManager.authorizationStatus {
-            case .authorizedAlways:
-                break
-            case .authorizedWhenInUse:
-                mapView.showsUserLocation = true
-                locationManager.startUpdatingLocation()
-                break
-            case .denied:
-                showAlertLocation(title: "Вы запретили использование геолокации", message: "Хотите изменить?", url: URL(string: UIApplication.openSettingsURLString))
-                break
-            case .restricted:
-                break
-            case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            @unknown default:
-                fatalError()
-            }
-        }
-
-        func showAlertLocation(title: String, message: String?, url: URL?) {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            let settingAction = UIAlertAction(title: "Настройки", style: .default) { (alert) in
-                if let url = url {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
-            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-
-            alert.addAction(settingAction)
-            alert.addAction(cancelAction)
-
-            present(alert, animated: true, completion: nil)
-        }
-
 }
 
 extension MapVC: CLLocationManagerDelegate {
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last?.coordinate {
             let region = MKCoordinateRegion(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -123,7 +123,7 @@ extension MapVC: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkAuthorization()
     }
-
+    
 }
 
 extension MapVC: MKMapViewDelegate {

@@ -13,14 +13,14 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     
     //MARK: - GUI
     
-    let startLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Вход"
-        label.font = .boldSystemFont(ofSize: 45)
-        return label
+    private(set) lazy var loginLabel: UILabel = {
+        let login = UILabel()
+        login.text = "Вход"
+        login.font = .boldSystemFont(ofSize: 45)
+        return login
     }()
     
-    let emailField: UITextField = {
+    private(set) lazy var emailField: UITextField = {
         let email = UITextField()
         email.borderStyle = .roundedRect
         email.placeholder = "Email"
@@ -28,7 +28,7 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         return email
     }()
     
-    let passwordField: UITextField = {
+    private(set) lazy var passwordField: UITextField = {
         let password = UITextField()
         password.borderStyle = .roundedRect
         password.placeholder = "Пароль"
@@ -36,7 +36,7 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         return password
     }()
     
-    let logInBtn: UIButton = {
+    private(set) lazy var logInBtn: UIButton = {
         let logIn = UIButton()
         logIn.setTitle("Войти", for: .normal)
         logIn.backgroundColor = .systemBlue
@@ -44,21 +44,19 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         return logIn
     }()
     
-    let signInBtn: UIButton = {
+    private(set) lazy var questionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Нет аккаунта?"
+        return label
+    }()
+    
+    private(set) lazy var signInBtn: UIButton = {
         let signIn = UIButton()
         signIn.setTitle("Зарегистрироваться", for: .normal)
         signIn.backgroundColor = .systemRed
         signIn.layer.cornerRadius = 10
         return signIn
     }()
-    
-    let questionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Нет аккаунта?"
-        return label
-    }()
-    
-    
     
     //MARK: - Initialisation
     
@@ -67,20 +65,20 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         
         self.view.backgroundColor = .systemBackground
         
-        self.view.addSubview(self.startLabel)
+        self.view.addSubview(self.loginLabel)
         self.view.addSubview(self.emailField)
         self.view.addSubview(self.passwordField)
         self.view.addSubview(self.logInBtn)
-        self.view.addSubview(self.signInBtn)
         self.view.addSubview(self.questionLabel)
+        self.view.addSubview(self.signInBtn)
         
         self.logInBtn.addTarget(self, action: #selector(didTapLogInBtn), for: .touchUpInside)
+        self.signInBtn.addTarget(self, action: #selector(didTapSignInBtn), for: .touchUpInside)
         
         //        self.emailField.delegate = self
         //        self.passwordField.delegate = self
         
         self.constraints()
-        
         self.setupHideKeyboardOnTap()
         
     }
@@ -90,7 +88,7 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         emailField.becomeFirstResponder()
     }
     
-    //MARK: - objc func
+    //MARK: - @objc func
     
     @objc private func didTapLogInBtn() {
         print("Test")
@@ -112,14 +110,24 @@ class AuthVC: UIViewController, UITextFieldDelegate {
                 strongSelf.showCreateAccount(email: email, password: password)
                 return
             }
-            print("вы вошли")
-            
-            strongSelf.emailField.isHidden = true
-            //            strongSelf.present(test, animated: true)
-            //            strongSelf.passwordField.isHidden = true
-            //            strongSelf.logInBtn.isHidden = true
-            //            strongSelf.signInBtn.isHidden = true
         })
+    }
+    
+    @objc private func didTapSignInBtn() {
+        let rootVC = RegistrationVC()
+        let navController = UINavigationController(rootViewController: rootVC)
+
+        rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад",
+                                                                  style: .plain,
+                                                                  target: self,
+                                                                  action: #selector(dismissTapped))
+        navController.modalPresentationStyle = .fullScreen
+
+        present(navController, animated: true)
+    }
+    
+    @objc private func dismissTapped() {
+        dismiss(animated: true, completion: nil)
     }
     
     //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -127,30 +135,18 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     //        return false
     //    }
     
+    //MARK: - Functions
+    
     func showCreateAccount(email: String, password: String) {
         let alert = UIAlertController(title: "Учетная запись отсутствует", message: "Хотите создать аккаунт?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Создать", style: .default, handler: {_ in
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
-                guard let strongSelf = self else {
-                    return
-                }
-                guard error == nil else {
-                    print("Account created failed")
-                    return
-                }
-                print(result?.user.uid ?? "error")
-                let ref = Database.database().reference().child("users")
-                
-                ref.child(result?.user.uid ?? "Error").updateChildValues(["email" : email])
-                print("вы вошли")
-                
-                strongSelf.emailField.isHidden = true
-                
-            })
-        }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: {_ in
-            
-        }))
+//        let createBtn = UIAlertAction(title: "Создать", style: .default, handler: {_ in
+        let createBtn = UIAlertAction(title: "Создать", style: .default) { (alert) in
+            self.didTapSignInBtn()
+        }
+        let cancelBtn = UIAlertAction(title: "Отмена", style: .default, handler: .none)
+        
+        alert.addAction(createBtn)
+        alert.addAction(cancelBtn)
         
         present(alert, animated: true)
     }
@@ -158,13 +154,13 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     //MARK: - Constraints
     
     private func constraints() {
-        self.startLabel.snp.makeConstraints {
+        self.loginLabel.snp.makeConstraints {
             $0.centerX.equalTo(self.view)
             $0.top.equalToSuperview().inset(150)
         }
         self.emailField.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(50)
-            $0.top.equalTo(startLabel.snp.bottom).inset(-15)
+            $0.top.equalTo(loginLabel.snp.bottom).inset(-15)
         }
         self.passwordField.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(50)
