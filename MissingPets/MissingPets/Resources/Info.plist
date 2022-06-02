@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Предоставьте доступ для возможности выбора фото</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Предоставьте доступ для возможности сделать фото</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Определить местоположение</string>
 	<key>UIApplicationSceneManifest</key>

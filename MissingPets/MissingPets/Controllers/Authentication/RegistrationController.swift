@@ -93,6 +93,8 @@ class RegistrationVC: UIViewController {
             let ref = Database.database().reference().child("Users")
             ref.child(result?.user.uid ?? "Error").updateChildValues(["name" : name])
             ref.child(result?.user.uid ?? "Error").updateChildValues(["email" : email])
+            ref.child(result?.user.uid ?? "Error").updateChildValues(["uid" : result!.user.uid])
+
             print("Successfully logged in")
         })
     }

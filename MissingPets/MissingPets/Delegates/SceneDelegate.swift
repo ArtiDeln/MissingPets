@@ -20,12 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             if ((user) != nil) {
                 print("User logged in")
-                let rootVC = TabBarController()
-                self?.window?.rootViewController = rootVC
+                let tabBarVC = TabBarController()
+                self?.window?.rootViewController = tabBarVC
             } else {
                 print("User not logged in")
-                let signup = AuthVC()
-                self?.window?.rootViewController = signup
+                let AuthVC = AuthVC()
+                self?.window?.rootViewController = AuthVC
             }
         }
         window?.makeKeyAndVisible()

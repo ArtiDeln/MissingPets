@@ -62,7 +62,6 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = .systemBackground
         
         self.view.addSubview(self.loginLabel)
@@ -110,8 +109,12 @@ class AuthVC: UIViewController, UITextFieldDelegate {
                 strongSelf.showCreateAccount(email: email, password: password)
                 return
             }
+            let user = result?.user
+            print("Logged in user: \(String(describing: user))")
         })
     }
+    
+    //MARK: - @objc functions
     
     @objc private func didTapSignInBtn() {
         let rootVC = RegistrationVC()
@@ -122,7 +125,6 @@ class AuthVC: UIViewController, UITextFieldDelegate {
                                                                   target: self,
                                                                   action: #selector(dismissTapped))
         navController.modalPresentationStyle = .fullScreen
-
         present(navController, animated: true)
     }
     

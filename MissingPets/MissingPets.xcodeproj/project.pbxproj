@@ -20,6 +20,9 @@
 		9A4EBBA32845779500BD41D4 /* ProfileEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */; };
 		9A4EBBA528457C5D00BD41D4 /* MyAnnounsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */; };
 		9A70E610283B001400D03B92 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70E60F283B001400D03B92 /* AuthController.swift */; };
+		9A98E4F82847FEC600C97A85 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */; };
+		9A98E4FA28480C0200C97A85 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4F928480C0200C97A85 /* StorageManager.swift */; };
+		9A98E4FC28483B3600C97A85 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4FB28483B3500C97A85 /* Extensions.swift */; };
 		9AA3B94128442CBB0034CC1B /* VetMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3B94028442CBB0034CC1B /* VetMap.swift */; };
 		9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3B94228442DB40034CC1B /* VetsModel.swift */; };
 		9AA4361B283A966A00E678D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */; };
@@ -45,6 +48,9 @@
 		9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditingController.swift; sourceTree = "<group>"; };
 		9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnounsController.swift; sourceTree = "<group>"; };
 		9A70E60F283B001400D03B92 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		9A98E4F928480C0200C97A85 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		9A98E4FB28483B3500C97A85 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9AA3B94028442CBB0034CC1B /* VetMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetMap.swift; sourceTree = "<group>"; };
 		9AA3B94228442DB40034CC1B /* VetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetsModel.swift; sourceTree = "<group>"; };
 		9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -97,6 +103,9 @@
 				9AA4361E283AE60C00E678D3 /* Delegates */,
 				9A1AC6B82835173D009E7BE0 /* Controllers */,
 				9AF0A8E02835591D00B04DBC /* Resources */,
+				9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */,
+				9A98E4F928480C0200C97A85 /* StorageManager.swift */,
+				9A98E4FB28483B3500C97A85 /* Extensions.swift */,
 			);
 			path = MissingPets;
 			sourceTree = "<group>";
@@ -105,8 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				9A70E611283B002300D03B92 /* TabBarControllers */,
-				9A70E60F283B001400D03B92 /* AuthController.swift */,
-				9A4EBB9C28453BAF00BD41D4 /* RegistrationController.swift */,
+				9A4EBBA62847BCAE00BD41D4 /* Authentication */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -129,6 +137,15 @@
 				9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		9A4EBBA62847BCAE00BD41D4 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				9A70E60F283B001400D03B92 /* AuthController.swift */,
+				9A4EBB9C28453BAF00BD41D4 /* RegistrationController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		9A70E611283B002300D03B92 /* TabBarControllers */ = {
@@ -287,8 +304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A98E4FC28483B3600C97A85 /* Extensions.swift in Sources */,
 				9A1AC6A92835156D009E7BE0 /* AddController.swift in Sources */,
 				9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */,
+				9A98E4F82847FEC600C97A85 /* DatabaseManager.swift in Sources */,
 				9A1AC6BA28351754009E7BE0 /* TabBarController.swift in Sources */,
 				9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */,
 				9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */,
@@ -301,6 +320,7 @@
 				9A1AC6BC283518AC009E7BE0 /* MissingPetsController.swift in Sources */,
 				9A4EBB9D28453BAF00BD41D4 /* RegistrationController.swift in Sources */,
 				9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */,
+				9A98E4FA28480C0200C97A85 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
