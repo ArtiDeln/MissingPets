@@ -10,11 +10,12 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import Firebase
+import FirebaseFirestore
 
 class RegistrationVC: UIViewController {
     
     //MARK: - GUI
-    
+        
     private(set) lazy var registrationLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
@@ -54,6 +55,10 @@ class RegistrationVC: UIViewController {
         return signIn
     }()
     
+    //MARK: - Variable
+    
+    var db: Firestore!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,9 +70,12 @@ class RegistrationVC: UIViewController {
         self.view.addSubview(self.passwordField)
         self.view.addSubview(self.signInBtn)
         
+        db = Firestore.firestore()
+        
         self.signInBtn.addTarget(self, action: #selector(didTapSignInBtn), for: .touchUpInside)
         
         self.constraints()
+        self.setupHideKeyboardOnTap()
     }
     
     @objc func didTapSignInBtn() {
@@ -82,21 +90,35 @@ class RegistrationVC: UIViewController {
             return
         }
         
+        
         FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
             
-            guard let strongSelf = self else { return }
+            guard let _ = self else { return } //let strongSelf = self
             guard error == nil else {
                 print("Account created failed")
                 return
             }
-            print(result?.user.uid ?? "error")
-            let ref = Database.database().reference().child("Users")
-            ref.child(result?.user.uid ?? "Error").updateChildValues(["name" : name])
-            ref.child(result?.user.uid ?? "Error").updateChildValues(["email" : email])
-            ref.child(result?.user.uid ?? "Error").updateChildValues(["uid" : result!.user.uid])
-
-            print("Successfully logged in")
+            
+            self?.db.collection("TestUsers").document(result?.user.uid ?? "Error").setData(["name": name,
+                                                                                            "email": email]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+            
+            //            print(result?.user.uid ?? "error")
+            //            let ref = Database.database().reference().child("Users")
+            //            ref.child(result?.user.uid ?? "Error").updateChildValues(["name" : name])
+            //            ref.child(result?.user.uid ?? "Error").updateChildValues(["email" : email])
+            //            ref.child(result?.user.uid ?? "Error").updateChildValues(["uid" : result!.user.uid])
         })
+        print("Successfully logged in")
+        
+        //TODO: - ALERT
+        //        sleep(1)
+        //        self.successfulAlert()
     }
     
     func successfulAlert() {

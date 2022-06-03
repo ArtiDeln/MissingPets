@@ -6,13 +6,61 @@
 //
 
 import Foundation
+import UIKit
 
 extension Date {
-    var millisecondsSince1970:Int {
-        return Int((self.timeIntervalSince1970 * 1000.0).rounded())
+    
+    var toMillis: Int64 {
+        return Int64(self.timeIntervalSince1970 * 1000)
+    }
+    
+    init(millis: Int64) {
+        self = Date(timeIntervalSince1970: TimeInterval(millis / 1000))
+        self.addTimeInterval(TimeInterval(Double(millis % 1000) / 1000 ))
+    }
+    
+}
+
+extension UIViewController {
+    
+    //MARK: - Hide keyboard
+    
+    func setupHideKeyboardOnTap() {
+        self.view.addGestureRecognizer(self.endEditingRecognizer())
+        self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
+    }
+    
+    private func endEditingRecognizer() -> UIGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        return tap
+    }
+    
+    //MARK: - Check size screen for adding large title
+    //https://overcoder.net/q/104736/%D0%BA%D0%B0%D0%BA-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B8%D1%82%D1%8C-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C-iphone-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-swift#:~:text=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0%20Swift%204%20%2B%20iPhone%20Xr%2C%20Xs%2C%20Xs%20Max
+    
+    enum UIUserInterfaceIdiom : Int {
+        case Unspecified
+        case phone
+        case pad
     }
 
-    init(milliseconds:Int) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
+    struct ScreenSize {
+        static let screenWidth = UIScreen.main.bounds.size.width
+        static let screenHeight = UIScreen.main.bounds.size.height
+        static let screenMaxLength = max(ScreenSize.screenWidth, ScreenSize.screenHeight)
+        static let screenMinLength = min(ScreenSize.screenWidth, ScreenSize.screenHeight)
+    }
+
+    struct DeviceType {
+        static let iPhoneSE3Gen = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.screenMaxLength <= 667.0
+    }
+    
+    func checkScreenForLargeTitle(){
+        if DeviceType.iPhoneSE3Gen {
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+        } else {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
     }
 }

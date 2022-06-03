@@ -60,13 +60,17 @@ class ProfileEditingVC: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Изменение профиля"
         
+        self.initView()
+        self.constraints()
+        self.setupHideKeyboardOnTap()
+    }
+    
+    private func initView(){
         self.view.addSubview(self.profileEditLabel)
         self.view.addSubview(self.nameField)
         self.view.addSubview(self.emailField)
         self.view.addSubview(self.passwordField)
         self.view.addSubview(self.saveBtn)
-        
-        self.constraints()
     }
     
     //MARK: - Constraints

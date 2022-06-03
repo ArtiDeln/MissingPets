@@ -16,6 +16,7 @@ class MapVC: UIViewController {
     private(set) var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.showsTraffic = false
         return mapView
     }()
     

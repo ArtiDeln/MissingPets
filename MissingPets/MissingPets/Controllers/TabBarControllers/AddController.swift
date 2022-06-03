@@ -9,8 +9,19 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseFirestore
 
-class AddPetVC: UIViewController {
+class AddPetVC: UIViewController, UIScrollViewDelegate {
+    
+    private(set) lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        return scroll
+    }()
+    
+    private(set) lazy var contentView: UIView = {
+        let contentView = UIView()
+        return contentView
+    }()
     
     let status = ["Пропал", "Найден"]
     
@@ -19,7 +30,7 @@ class AddPetVC: UIViewController {
     private(set) lazy var petImgView: UIImageView = {
         let petPhoto = UIImageView()
         petPhoto.image = UIImage(named: "AddPhotoImage")
-        //        petPhoto.contentMode = .scaleAspectFit
+        petPhoto.contentMode = .scaleAspectFit
         petPhoto.layer.borderWidth = 1
         petPhoto.layer.borderColor = UIColor.gray.cgColor
         petPhoto.isUserInteractionEnabled = true
@@ -28,7 +39,7 @@ class AddPetVC: UIViewController {
         return petPhoto
     }()
     
-    private(set) lazy var test1: UISegmentedControl = {
+    private(set) lazy var switchSgmntdCntrl: UISegmentedControl = {
         let segment = UISegmentedControl(items: status)
         segment.selectedSegmentIndex = 0
         segment.addTarget(self, action: #selector(didSegmentValueChange), for: .valueChanged)
@@ -38,7 +49,7 @@ class AddPetVC: UIViewController {
     private(set) lazy var petNicknameTxtFld: UITextField = {
         let nickname = UITextField()
         nickname.borderStyle = .roundedRect
-        nickname.placeholder = "Имя"
+        nickname.placeholder = "Кличка"
         nickname.autocapitalizationType = .none
         return nickname
     }()
@@ -75,20 +86,20 @@ class AddPetVC: UIViewController {
         return petMissingAddress
     }()
     
-    private(set) lazy var petOwnerPhoneTxtFld: UITextField = {
-        let petOwnerPhone = UITextField()
-        petOwnerPhone.borderStyle = .roundedRect
-        petOwnerPhone.placeholder = "Телефон владельца"
-        petOwnerPhone.autocapitalizationType = .none
-        return petOwnerPhone
+    private(set) lazy var phoneNumberTxtFld: UITextField = {
+        let phoneNumber = UITextField()
+        phoneNumber.borderStyle = .roundedRect
+        phoneNumber.placeholder = "Телефон владельца"
+        phoneNumber.autocapitalizationType = .none
+        return phoneNumber
     }()
     
-    private(set) lazy var additionaDescriptionTxtFld: UITextField = {
-        let additionaDescription = UITextField()
-        additionaDescription.borderStyle = .roundedRect
-        additionaDescription.placeholder = "Доп. описание"
-        additionaDescription.autocapitalizationType = .none
-        return additionaDescription
+    private(set) lazy var additionalInfoTxtFld: UITextField = {
+        let additionalInfo = UITextField()
+        additionalInfo.borderStyle = .roundedRect
+        additionalInfo.placeholder = "Доп. информация"
+        additionalInfo.autocapitalizationType = .none
+        return additionalInfo
     }()
     
     private(set) lazy var publishBtn: UIButton = {
@@ -111,44 +122,47 @@ class AddPetVC: UIViewController {
         
         ref = Database.database().reference()
         
-        //        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Разместить объявление"
         
         self.view.backgroundColor = .systemBackground
         
         self.initView()
-        
         self.constraints()
+        
+        self.setupHideKeyboardOnTap()
     }
     
     //MARK: - Initialization
     
     func initView() {
-        self.view.addSubview(petImgView)
-        self.view.addSubview(test1)
-        self.view.addSubview(petNicknameTxtFld)
-        self.view.addSubview(petTypeTxtFld)
-        self.view.addSubview(petBreedTxtFld)
-        self.view.addSubview(petGenderTxtFld)
-        self.view.addSubview(petMissingAddressTxtFld)
-        self.view.addSubview(petOwnerPhoneTxtFld)
-        self.view.addSubview(additionaDescriptionTxtFld)
-        self.view.addSubview(publishBtn)
+        self.view.addSubview(scrollView)
+        self.scrollView.addSubview(contentView)
+        self.contentView.addSubview(petImgView)
+        self.contentView.addSubview(switchSgmntdCntrl)
+        self.contentView.addSubview(petNicknameTxtFld)
+        self.contentView.addSubview(petTypeTxtFld)
+        self.contentView.addSubview(petBreedTxtFld)
+        self.contentView.addSubview(petGenderTxtFld)
+        self.contentView.addSubview(petMissingAddressTxtFld)
+        self.contentView.addSubview(phoneNumberTxtFld)
+        self.contentView.addSubview(additionalInfoTxtFld)
+        self.contentView.addSubview(publishBtn)
     }
     
     //MARK: - @objc functions
     
-    var variable = String()
-    
+    var variable = "missing"
     @objc func didSegmentValueChange(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 0: variable = "Пропал"
-        case 1: variable = "Найден"
-        default: variable = "Пропал"
+        case 0: variable = "missing"
+            phoneNumberTxtFld.placeholder = "Телефон владельца"
+            petNicknameTxtFld.isHidden = false
+        case 1: variable = "founded"
+            phoneNumberTxtFld.placeholder = "Телефон нашедшего"
+            petNicknameTxtFld.isHidden = true
+        default: variable = "missing"
         }
     }
-    
-    
     
     @objc func didPublishBtnTapped() {
         petNicknameTxtFld.resignFirstResponder()
@@ -156,58 +170,77 @@ class AddPetVC: UIViewController {
         petBreedTxtFld.resignFirstResponder()
         petGenderTxtFld.resignFirstResponder()
         petMissingAddressTxtFld.resignFirstResponder()
-        petOwnerPhoneTxtFld.resignFirstResponder()
-        additionaDescriptionTxtFld.resignFirstResponder()
+        phoneNumberTxtFld.resignFirstResponder()
+        additionalInfoTxtFld.resignFirstResponder()
         
         guard let petNickname = petNicknameTxtFld.text,
               let petType = petTypeTxtFld.text,
               let petBreed = petBreedTxtFld.text,
               let petGender = petGenderTxtFld.text,
               let petMissingAddress = petMissingAddressTxtFld.text,
-              let petOwnerPhone = petOwnerPhoneTxtFld.text,
-              let additionalDescription = additionaDescriptionTxtFld.text,
+              let phoneNumber = phoneNumberTxtFld.text,
+              let additionalInfo = additionalInfoTxtFld.text,
               !petNickname.isEmpty,
               !petType.isEmpty,
               !petBreed.isEmpty,
               !petGender.isEmpty,
               !petMissingAddress.isEmpty,
-              !petOwnerPhone.isEmpty else { return }
-        //                DatabaseManager.shared.insertAnnounc(with: MissingPetsAnnounc(petName: petNickname))
-        
-//        ref.child("Test iOS Missing Animals").childByAutoId().setValue(["Name": petNickname,
-//                                                                        "Type": petType,
-//                                                                        "Breed": petBreed,
-//                                                                        "Gender": petGender,
-//                                                                        "MissingAddress": petMissingAddress,
-//                                                                        "OwnerPhone": petOwnerPhone,
-//                                                                        "AdditionalDescription": additionalDescription])
-        //        ref.child("Test iOS Missing Animals").childByAutoId().setValue(["Type": petType])
-        //        ref.child("Test iOS Missing Animals").childByAutoId().setValue(["Breed": petBreed])
-        //        ref.child("Test iOS Missing Animals").childByAutoId().setValue(["Gender": petGender])
-        //        ref.child("Test iOS Missing Animals").childByAutoId().setValue(["MissingAddress": petMissingAddress])
-        //        ref.child("Test iOS Missing Animals").childByAutoId().setValue(["OwnerPhone": petOwnerPhone])
-        //        ref.child("Test iOS Missing Animals").childByAutoId().setValue(["AdditionalDescription": additionalDescription])
+              !phoneNumber.isEmpty else {
+            errorAlert()
+            return
+        }
         
         uploadPetPhoto(photo: petImgView.image!) { (result) in
             switch result {
             case .success(let url):
-                self.ref.child("Test iOS Missing Animals").childByAutoId().setValue(["Photo": url.absoluteString,
-                                                                                     "Name": petNickname,
-                                                                                     "Type": petType,
-                                                                                     "Breed": petBreed,
-                                                                                     "Gender": petGender,
-                                                                                     "MissingAddress": petMissingAddress,
-                                                                                     "OwnerPhone": petOwnerPhone,
-                                                                                     "AdditionalDescription": additionalDescription,
-                                                                                     "Status": self.variable])
+                Firestore.firestore().collection("Test iOS Missing Animals").addDocument(data: ["photo": url.absoluteString,
+                                                                                                "name": petNickname,
+                                                                                                "type": petType,
+                                                                                                "breed": petBreed,
+                                                                                                "gender": petGender,
+                                                                                                "missingAddress": petMissingAddress,
+                                                                                                "phone": phoneNumber,
+                                                                                                "additionalInfo": additionalInfo,
+                                                                                                "status": self.variable,
+                                                                                                "owner": self.user!.uid]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+                }
+                
+//                self.ref.child("Test iOS Missing Animals").childByAutoId().setValue(["photo": url.absoluteString,
+//                                                                                     "name": petNickname,
+//                                                                                     "type": petType,
+//                                                                                     "breed": petBreed,
+//                                                                                     "gender": petGender,
+//                                                                                     "missingAddress": petMissingAddress,
+//                                                                                     "phone": phoneNumber,
+//                                                                                     "additionalInfo": additionalInfo,
+//                                                                                     "status": self.variable,
+//                                                                                     "owner": self.user?.uid])
             case .failure:
+                print("error data added")
                 return
             }
         }
+        clearAllItems()
+    }
+    
+    private func clearAllItems() {
+        self.petImgView.image = UIImage(named: "AddPhotoImage")
+        self.petNicknameTxtFld.text = ""
+        self.petTypeTxtFld.text = ""
+        self.petBreedTxtFld.text = ""
+        self.petGenderTxtFld.text = ""
+        self.petMissingAddressTxtFld.text = ""
+        self.phoneNumberTxtFld.text = ""
+        self.additionalInfoTxtFld.text = ""
     }
     
     private func uploadPetPhoto(photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
-        let ref = Storage.storage().reference().child("Test iOS Animal Photo").child("\(user?.email ?? "UnidentifiedUser")-\(Date().millisecondsSince1970)")
+        let ref = Storage.storage().reference().child("Test iOS Animal Photo").child("\(user?.email ?? "UnidentifiedUser")-\(Date().toMillis)")
         
         guard let imageData = petImgView.image?.jpegData(compressionQuality: 0.5) else { return }
         
@@ -229,49 +262,77 @@ class AddPetVC: UIViewController {
         }
     }
     
+    func errorAlert() {
+        let alertController = UIAlertController(title: "Заполните все поля!",
+                                                message: "Поле доп. информация не обязательна к заполнению",
+                                                preferredStyle: .alert)
+        let action          = UIAlertAction(title: "OK",
+                                            style: .default,
+                                            handler: .none)
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     //MARK: - Constraints
     
     private func constraints() {
+        scrollView.snp.makeConstraints {
+            $0.edges.equalTo(self.view)
+        }
+        contentView.snp.makeConstraints {
+            $0.top.bottom.equalTo(self.scrollView)
+            $0.width.equalTo(self.view)
+        }
         petImgView.snp.makeConstraints {
-            $0.top.equalTo(self.view).inset(100)
+            $0.top.equalTo(self.contentView)
             $0.size.equalTo(120)
-            $0.centerX.equalTo(self.view)
+            $0.centerX.equalTo(self.contentView)
+        }
+        switchSgmntdCntrl.snp.makeConstraints {
+            $0.top.equalTo(petImgView.snp.bottom).offset(10)
+            $0.width.equalTo(200)
+            $0.centerX.equalTo(self.contentView)
         }
         petNicknameTxtFld.snp.makeConstraints {
-            $0.top.equalTo(self.petImgView.snp.bottom).offset(30)
-            $0.left.right.equalToSuperview().inset(50)
+            $0.top.equalTo(self.switchSgmntdCntrl.snp.bottom).offset(10)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
         }
         petTypeTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petNicknameTxtFld.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(50)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
         }
         petBreedTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petTypeTxtFld.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(50)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
         }
         petGenderTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petBreedTxtFld.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(50)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
         }
         petMissingAddressTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petGenderTxtFld.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(50)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
         }
-        petOwnerPhoneTxtFld.snp.makeConstraints {
+        phoneNumberTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petMissingAddressTxtFld.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(50)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
         }
-        additionaDescriptionTxtFld.snp.makeConstraints {
-            $0.top.equalTo(self.petOwnerPhoneTxtFld.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(50)
+        additionalInfoTxtFld.snp.makeConstraints {
+            $0.top.equalTo(self.phoneNumberTxtFld.snp.bottom).offset(10)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
         }
         publishBtn.snp.makeConstraints {
-            $0.top.equalTo(additionaDescriptionTxtFld.snp.bottom).offset(10)
-            $0.left.right.equalToSuperview().inset(50)
-        }
-        test1.snp.makeConstraints {
-            $0.top.equalTo(publishBtn.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(additionalInfoTxtFld.snp.bottom).offset(10)
+            $0.width.equalTo(self.contentView).inset(50)
+            $0.centerX.equalTo(self.contentView)
+            $0.bottom.equalTo(self.contentView).offset(-20)
         }
     }
 }

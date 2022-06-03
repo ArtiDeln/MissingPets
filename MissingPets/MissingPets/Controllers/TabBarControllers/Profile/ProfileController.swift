@@ -7,8 +7,17 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class ProfileVC: UIViewController {
+    
+    //MARK: - Constants
+    
+    let user = Auth.auth().currentUser
+    
+    //MARK: - Variables
+    
+    //    var ref: DatabaseReference!
     
     //MARK: - GUI
     
@@ -22,7 +31,7 @@ class ProfileVC: UIViewController {
         button.setTitle("Мои объявления", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
-//        button.titleLabel?.font = .systemFont(ofSize: 12)
+        //        button.titleLabel?.font = .systemFont(ofSize: 12)
         button.addTarget(self, action: #selector(myAnnounsTapped), for: .touchUpInside)
         return button
     }()
@@ -32,7 +41,7 @@ class ProfileVC: UIViewController {
         button.setTitle("Редактировать профиль", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
-//        button.titleLabel?.font = .systemFont(ofSize: 12)
+        //        button.titleLabel?.font = .systemFont(ofSize: 12)
         button.addTarget(self, action: #selector(profileEditTapped), for: .touchUpInside)
         return button
     }()
@@ -42,14 +51,10 @@ class ProfileVC: UIViewController {
         logOut.setTitle("Выйти", for: .normal)
         logOut.backgroundColor = .systemGray
         logOut.layer.cornerRadius = 10
-//        logOut.titleLabel?.font = .systemFont(ofSize: 12)
+        //        logOut.titleLabel?.font = .systemFont(ofSize: 12)
         logOut.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
         return logOut
     }()
-    
-    //MARK: - Constants
-    
-    let user = Auth.auth().currentUser
     
     //MARK: - Initialisation
     
@@ -57,22 +62,26 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
         
-//        self.navigationController?.view.backgroundColor = .darkGray
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Профиль"
-        
-        self.view.addSubview(emailLabel)
-        self.view.addSubview(myAnnounsBtn)
-        self.view.addSubview(profileEditBtn)
-        self.view.addSubview(logOutBtn)
-        
-        self.setData()
-        self.constraints()
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
                                                                  style: .plain,
                                                                  target: self,
                                                                  action: #selector(logOutTapped))
+        
+        self.initView()
+        self.constraints()
+        self.setName()
+        
+        
+        //        ref = Database.database().reference()
+    }
+    
+    private func initView() {
+        self.view.addSubview(emailLabel)
+        self.view.addSubview(myAnnounsBtn)
+        self.view.addSubview(profileEditBtn)
+        self.view.addSubview(logOutBtn)
     }
     
     //MARK: - @objc functions
@@ -97,16 +106,34 @@ class ProfileVC: UIViewController {
     
     //MARK: - Set data
     
-    private func setData() {
+    private func setName() {
+        
         if let user = user {
-            emailLabel.text = "Email: \((user.email ?? "Error") as String)"
-            var multiFactorString = "MultiFactor: "
-            for info in user.multiFactor.enrolledFactors {
-              multiFactorString += info.displayName ?? "[DispayName]"
-              multiFactorString += " "
-                print(multiFactorString)
-            }
+            Firestore.firestore().collection("TestUsers").document(user.uid)
+                .addSnapshotListener { documentSnapshot, error in
+                    guard let document = documentSnapshot else {
+                        print("Error fetching document: \(error!)")
+                        return
+                    }
+                    guard let data = document.data() else {
+                        print("Document data was empty.")
+                        return
+                    }
+                    let userName = data["name"] as? String ?? "UnidentifiedUser"
+                    self.emailLabel.text = userName
+                    print("User name = \(userName)")
+                }
         }
+        
+        //        if let user = user { //добавить в viewDidAppear
+        //            ref.child("Users/\(user.uid)").observeSingleEvent(of: .value, with: { snapshot in
+        //                let value = snapshot.value as? NSDictionary
+        //                let username = value?["name"] as? String ?? "UnidentifiedUser"
+        //                self.emailLabel.text = "\(username)"
+        //            }) { error in
+        //                print(error.localizedDescription)
+        //            }
+        //        }
     }
     
     //MARK: - Constraints
