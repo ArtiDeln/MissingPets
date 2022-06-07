@@ -96,4 +96,79 @@ class Service {
         }
     }
     
+    func getMyPetsData(completion: @escaping ([MyPetsData]) -> ()) {
+        
+        let user = Auth.auth().currentUser
+
+        Firestore.firestore().collection("Missing Animals").whereField("owner", isEqualTo: "\(user!.uid)").getDocuments { snap, err in
+            if err == nil {
+                var petList = [MyPetsData]()
+                if let docs = snap?.documents {
+                    for doc in docs {
+                        let data = doc.data()
+                        var imgData = Data()
+                        if let url = URL(string: data["photo"] as? String ?? "No photo") {
+                            do {
+                                let dataImage: Data = try Data(contentsOf: url)
+                                imgData = dataImage
+                            } catch {
+                                print(error)
+                            }
+                        }
+                        let name = data["name"] as? String ?? "Неизвестна"
+                        let phone = data["phone"] as? String ?? "Неизвестен"
+                        let breed = data["breed"] as? String ?? "Неизвестно"
+                        let type = data["type"] as? String ?? "Неизвестен"
+                        let gender = data["gender"] as? String ?? "Неизвестен"
+                        let missingAddress = data["missingAddress"] as? String ?? "Неизвестен"
+                        let additionalInfo = data["additionalInfo"] as? String ?? "Отсутствует"
+                        
+                        petList.append(MyPetsData(petPhoto: UIImage(data: imgData)!,
+                                                       petName: name,
+                                                       petBreed: breed,
+                                                       petType: type,
+                                                       petGender: gender,
+                                                       missingAddress: missingAddress,
+                                                       additionalInfo: additionalInfo,
+                                                       phone: phone))
+                    }
+                }
+                completion(petList)
+            }
+        }
+    }
+    
+}
+
+struct MissingPetsData {
+    var petPhoto: UIImage
+    var petName: String
+    var petBreed: String
+    var petType: String
+    var petGender: String
+    var missingAddress: String
+    var additionalInfo: String
+    var phone: String
+}
+
+struct FoundedPetsData {
+    var petPhoto: UIImage
+    var petName: String
+    var petBreed: String
+    var petType: String
+    var petGender: String
+    var missingAddress: String
+    var additionalInfo: String
+    var phone: String
+}
+
+struct MyPetsData {
+    var petPhoto: UIImage
+    var petName: String
+    var petBreed: String
+    var petType: String
+    var petGender: String
+    var missingAddress: String
+    var additionalInfo: String
+    var phone: String
 }

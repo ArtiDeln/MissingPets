@@ -28,6 +28,15 @@ class CustomTableViewCell : UITableViewCell {
         }
     }
     
+    var dataMyP : MyPetsData? {
+        didSet {
+            petNameTitleLbl.text = "Кличка: \(dataMyP!.petName)"
+            dataMissingAddressLbl.text = "Адрес: \(dataMyP!.missingAddress)"
+            dataImage.image = dataMyP?.petPhoto
+            breedLbl.text = "Порода: \(dataMyP!.petBreed)"
+        }
+    }
+    
     private(set) lazy var breedLbl: UILabel = {
         let phone = UILabel()
         phone.textAlignment = .left
@@ -99,26 +108,4 @@ class CustomTableViewCell : UITableViewCell {
             $0.top.equalTo(self.breedLbl.snp.bottom).inset(-10)
         }
     }
-}
-
-struct MissingPetsData {
-    var petPhoto: UIImage
-    var petName: String
-    var petBreed: String
-    var petType: String
-    var petGender: String
-    var missingAddress: String
-    var additionalInfo: String
-    var phone: String
-}
-
-struct FoundedPetsData {
-    var petPhoto: UIImage
-    var petName: String
-    var petBreed: String
-    var petType: String
-    var petGender: String
-    var missingAddress: String
-    var additionalInfo: String
-    var phone: String
 }

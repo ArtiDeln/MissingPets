@@ -100,7 +100,6 @@ extension MissingPetsVC: UITableViewDelegate, UITableViewDataSource {
         rootVC.petAdditionalInfo.text = missingPetsData[indexPath.row].additionalInfo
         rootVC.petMissingAdressLbl.text = "Адрес пропажи: \(missingPetsData[indexPath.row].missingAddress)"
         rootVC.petTypeLbl.text = missingPetsData[indexPath.row].petType
-
         rootVC.number = "\(missingPetsData[indexPath.row].phone)"
         
         navVC.modalPresentationStyle = .automatic

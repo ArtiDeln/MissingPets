@@ -93,7 +93,11 @@ extension FoundPetsVC: UITableViewDelegate, UITableViewDataSource {
         
         rootVC.navigationItem.title = "\(self.foundedPetsData[indexPath.row].petName)"
         rootVC.petPhotoImg.image = foundedPetsData[indexPath.row].petPhoto
-        rootVC.petTypeLbl.text = "\(foundedPetsData[indexPath.row].petType)"
+        rootVC.petBreedLbl.text = "Порода: \(foundedPetsData[indexPath.row].petBreed)"
+        rootVC.petGenderLbl.text = "Пол: \(foundedPetsData[indexPath.row].petGender)"
+        rootVC.petAdditionalInfo.text = foundedPetsData[indexPath.row].additionalInfo
+        rootVC.petMissingAdressLbl.text = "Адрес пропажи: \(foundedPetsData[indexPath.row].missingAddress)"
+        rootVC.petTypeLbl.text = foundedPetsData[indexPath.row].petType
         rootVC.number = "\(foundedPetsData[indexPath.row].phone)"
         
         navVC.modalPresentationStyle = .automatic
