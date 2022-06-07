@@ -1,17 +1,19 @@
 //
-//  FoundPetsVC.swift
+//  MainController.swift
 //  MissingPets
 //
-//  Created by Artyom Butorin on 23.05.22.
+//  Created by Artyom Butorin on 18.05.22.
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
 
-class FoundPetsVC: UIViewController {
+class MissingPetsVC: UIViewController {
     
-    static let shared = FoundPetsVC()
+    static let shared = MissingPetsVC()
     
-    private(set) lazy var foundedPetsData = [FoundedPetsData]()
+    private(set) lazy var missingPetsData = [MissingPetsData]()
     
     //MARK: - GUI
     
@@ -33,7 +35,7 @@ class FoundPetsVC: UIViewController {
         
         self.view.backgroundColor = .systemBackground
         
-        self.navigationItem.title = "Найденные питомцы"
+        self.navigationItem.title = "Пропавшие питомцы"
         
         self.view.addSubview(tableView)
         self.tableView.refreshControl = myRefreshControl
@@ -41,13 +43,13 @@ class FoundPetsVC: UIViewController {
         self.myRefreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         self.setTableViewSettings()
-        self.getFoundedPetsData()
+        self.getMissingPetsData()
     }
     
     //MARK: - @objc funcs
     
     @objc private func refresh(sender: UIRefreshControl) {
-        self.getFoundedPetsData()
+        self.getMissingPetsData()
         sender.endRefreshing()
     }
     
@@ -61,23 +63,23 @@ class FoundPetsVC: UIViewController {
         self.tableView.frame = view.bounds
     }
     
-    func getFoundedPetsData() {
-        Service.shared.getFoundedPetsData { foundedPetsData in
-            self.foundedPetsData = foundedPetsData
+    func getMissingPetsData() {
+        Service.shared.getMissingPetsData { missingPetsData in
+            self.missingPetsData = missingPetsData
             self.tableView.reloadData()
         }
     }
 }
 
-extension FoundPetsVC: UITableViewDelegate, UITableViewDataSource {
+extension MissingPetsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foundedPetsData.count
+        return missingPetsData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        cell.dataFP = foundedPetsData[indexPath.row]
+        cell.dataMP = missingPetsData[indexPath.row]
         return cell
     }
     
@@ -91,10 +93,15 @@ extension FoundPetsVC: UITableViewDelegate, UITableViewDataSource {
                                                                   target: self,
                                                                   action: #selector(backBtnTapped))
         
-        rootVC.navigationItem.title = "\(self.foundedPetsData[indexPath.row].petName)"
-        rootVC.petPhotoImg.image = foundedPetsData[indexPath.row].petPhoto
-        rootVC.petTypeLbl.text = "\(foundedPetsData[indexPath.row].petType)"
-        rootVC.number = "\(foundedPetsData[indexPath.row].phone)"
+        rootVC.navigationItem.title = "\(self.missingPetsData[indexPath.row].petName)"
+        rootVC.petPhotoImg.image = missingPetsData[indexPath.row].petPhoto
+        rootVC.petBreedLbl.text = "Порода: \(missingPetsData[indexPath.row].petBreed)"
+        rootVC.petGenderLbl.text = "Пол: \(missingPetsData[indexPath.row].petGender)"
+        rootVC.petAdditionalInfo.text = missingPetsData[indexPath.row].additionalInfo
+        rootVC.petMissingAdressLbl.text = "Адрес пропажи: \(missingPetsData[indexPath.row].missingAddress)"
+        rootVC.petTypeLbl.text = missingPetsData[indexPath.row].petType
+
+        rootVC.number = "\(missingPetsData[indexPath.row].phone)"
         
         navVC.modalPresentationStyle = .automatic
         present(navVC, animated: true)

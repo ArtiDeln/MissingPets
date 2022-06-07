@@ -55,9 +55,7 @@ class RegistrationVC: UIViewController {
         return signIn
     }()
     
-    //MARK: - Variable
-    
-    var db: Firestore!
+    //MARK: - ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,8 +67,6 @@ class RegistrationVC: UIViewController {
         self.view.addSubview(self.emailField)
         self.view.addSubview(self.passwordField)
         self.view.addSubview(self.signInBtn)
-        
-        db = Firestore.firestore()
         
         self.signInBtn.addTarget(self, action: #selector(didTapSignInBtn), for: .touchUpInside)
         
@@ -98,26 +94,16 @@ class RegistrationVC: UIViewController {
                 return
             }
             
-            self?.db.collection("TestUsers").document(result?.user.uid ?? "Error").setData(["name": name,
-                                                                                            "email": email]) { err in
+            Firestore.firestore().collection("Users").document(result?.user.uid ?? "Error").setData(["name": name,
+                                                                                        "email": email]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
                 } else {
                     print("Document successfully written!")
                 }
             }
-            
-            //            print(result?.user.uid ?? "error")
-            //            let ref = Database.database().reference().child("Users")
-            //            ref.child(result?.user.uid ?? "Error").updateChildValues(["name" : name])
-            //            ref.child(result?.user.uid ?? "Error").updateChildValues(["email" : email])
-            //            ref.child(result?.user.uid ?? "Error").updateChildValues(["uid" : result!.user.uid])
         })
         print("Successfully logged in")
-        
-        //TODO: - ALERT
-        //        sleep(1)
-        //        self.successfulAlert()
     }
     
     func successfulAlert() {

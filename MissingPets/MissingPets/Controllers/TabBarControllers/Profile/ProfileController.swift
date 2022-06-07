@@ -109,7 +109,7 @@ class ProfileVC: UIViewController {
     private func setName() {
         
         if let user = user {
-            Firestore.firestore().collection("TestUsers").document(user.uid)
+            Firestore.firestore().collection("Users").document(user.uid)
                 .addSnapshotListener { documentSnapshot, error in
                     guard let document = documentSnapshot else {
                         print("Error fetching document: \(error!)")
@@ -124,16 +124,6 @@ class ProfileVC: UIViewController {
                     print("User name = \(userName)")
                 }
         }
-        
-        //        if let user = user { //добавить в viewDidAppear
-        //            ref.child("Users/\(user.uid)").observeSingleEvent(of: .value, with: { snapshot in
-        //                let value = snapshot.value as? NSDictionary
-        //                let username = value?["name"] as? String ?? "UnidentifiedUser"
-        //                self.emailLabel.text = "\(username)"
-        //            }) { error in
-        //                print(error.localizedDescription)
-        //            }
-        //        }
     }
     
     //MARK: - Constraints

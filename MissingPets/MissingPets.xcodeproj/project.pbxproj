@@ -22,7 +22,6 @@
 		9A4EBBA528457C5D00BD41D4 /* MyAnnounsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */; };
 		9A593408284ADA4000E9A8F2 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A593407284ADA4000E9A8F2 /* CustomTableViewCell.swift */; };
 		9A70E610283B001400D03B92 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70E60F283B001400D03B92 /* AuthController.swift */; };
-		9A98E4F82847FEC600C97A85 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */; };
 		9A98E4FA28480C0200C97A85 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4F928480C0200C97A85 /* StorageManager.swift */; };
 		9A98E4FC28483B3600C97A85 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4FB28483B3500C97A85 /* Extensions.swift */; };
 		9A98E4FE284976A200C97A85 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4FD284976A200C97A85 /* Service.swift */; };
@@ -53,7 +52,6 @@
 		9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnounsController.swift; sourceTree = "<group>"; };
 		9A593407284ADA4000E9A8F2 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		9A70E60F283B001400D03B92 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
-		9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		9A98E4F928480C0200C97A85 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		9A98E4FB28483B3500C97A85 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9A98E4FD284976A200C97A85 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 				9AA4361E283AE60C00E678D3 /* Delegates */,
 				9A1AC6B82835173D009E7BE0 /* Controllers */,
 				9AF0A8E02835591D00B04DBC /* Resources */,
-				9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */,
 				9A98E4FD284976A200C97A85 /* Service.swift */,
 				9A98E4F928480C0200C97A85 /* StorageManager.swift */,
 				9A98E4FB28483B3500C97A85 /* Extensions.swift */,
@@ -120,10 +117,20 @@
 		9A1AC6B82835173D009E7BE0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A206C4F284FD74D0068F70E /* OtherControlls */,
 				9A70E611283B002300D03B92 /* TabBarControllers */,
 				9A4EBBA62847BCAE00BD41D4 /* Authentication */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9A206C4F284FD74D0068F70E /* OtherControlls */ = {
+			isa = PBXGroup;
+			children = (
+				9A593407284ADA4000E9A8F2 /* CustomTableViewCell.swift */,
+				9A3ACCCC284D8B6E000728D5 /* AboutPetController.swift */,
+			);
+			path = OtherControlls;
 			sourceTree = "<group>";
 		};
 		9A4EBB9E28453BB600BD41D4 /* Map */ = {
@@ -155,21 +162,11 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		9A593403284AD9F500E9A8F2 /* MissingPets */ = {
-			isa = PBXGroup;
-			children = (
-				9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */,
-				9A593407284ADA4000E9A8F2 /* CustomTableViewCell.swift */,
-				9A3ACCCC284D8B6E000728D5 /* AboutPetController.swift */,
-			);
-			path = MissingPets;
-			sourceTree = "<group>";
-		};
 		9A70E611283B002300D03B92 /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
 				9A1AC6B928351754009E7BE0 /* TabBarController.swift */,
-				9A593403284AD9F500E9A8F2 /* MissingPets */,
+				9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */,
 				9AA4361C283AE50400E678D3 /* FoundPetsController.swift */,
 				9A1AC6A82835156D009E7BE0 /* AddController.swift */,
 				9A4EBBA12845772B00BD41D4 /* Profile */,
@@ -324,7 +321,6 @@
 				9A98E4FC28483B3600C97A85 /* Extensions.swift in Sources */,
 				9A1AC6A92835156D009E7BE0 /* AddController.swift in Sources */,
 				9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */,
-				9A98E4F82847FEC600C97A85 /* DatabaseManager.swift in Sources */,
 				9A1AC6BA28351754009E7BE0 /* TabBarController.swift in Sources */,
 				9A593408284ADA4000E9A8F2 /* CustomTableViewCell.swift in Sources */,
 				9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */,

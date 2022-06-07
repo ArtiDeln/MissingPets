@@ -13,8 +13,6 @@ class ProfileEditingVC: UIViewController {
     
     let user = Auth.auth().currentUser
     
-//    var credential: AuthCredential?
-    
     //MARK: - GUI
     
     private(set) lazy var nameField: UITextField = {
@@ -33,10 +31,18 @@ class ProfileEditingVC: UIViewController {
         return email
     }()
     
-    private(set) lazy var passwordField: UITextField = {
+    private(set) lazy var oldPasswordField: UITextField = {
         let password = UITextField()
         password.borderStyle = .roundedRect
-        password.placeholder = "Пароль"
+        password.placeholder = "Действительный пароль"
+        password.isSecureTextEntry = true
+        return password
+    }()
+    
+    private(set) lazy var newPasswordField: UITextField = {
+        let password = UITextField()
+        password.borderStyle = .roundedRect
+        password.placeholder = "Новый пароль"
         password.isSecureTextEntry = true
         return password
     }()
@@ -72,7 +78,8 @@ class ProfileEditingVC: UIViewController {
     private func initView(){
         self.view.addSubview(self.nameField)
         self.view.addSubview(self.emailField)
-        self.view.addSubview(self.passwordField)
+        self.view.addSubview(self.oldPasswordField)
+        self.view.addSubview(self.newPasswordField)
         self.view.addSubview(self.saveBtn)
     }
     
@@ -90,7 +97,6 @@ class ProfileEditingVC: UIViewController {
                     }
                     self.nameField.text = data["name"] as? String ?? "UnidentifiedUser"
                     self.emailField.text = data["email"] as? String ?? "UnidentifiedEmail"
-//                    print("User name = \(userName)")
                 }
         }
     }
@@ -99,7 +105,7 @@ class ProfileEditingVC: UIViewController {
         
         guard let name = nameField.text, !name.isEmpty,
               let email = emailField.text, !email.isEmpty,
-              let password = passwordField.text, !password.isEmpty else {
+              let password = oldPasswordField.text, !password.isEmpty else {
             print("Missing field")
             let alert = UIAlertController(title: "Заполните все поля", message: nil, preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default)
@@ -109,7 +115,7 @@ class ProfileEditingVC: UIViewController {
         }
         
         if let user = user {
-            Firestore.firestore().collection("TestUsers").document(user.uid)
+            Firestore.firestore().collection("Users").document(user.uid)
                 .updateData([
                     "name": nameField.text ?? "",
                     "email": emailField.text ?? ""
@@ -121,16 +127,6 @@ class ProfileEditingVC: UIViewController {
                     }
                 }
         }
-
-//        // Prompt the user to re-provide their sign-in credentials
-//
-//        user?.reauthenticate(with: credential ?? nil) { error, arg   in
-//          if let error = error {
-//            // An error happened.
-//          } else {
-//            // User re-authenticated.
-//          }
-//        }
         
         self.updateUserEmailWithPassword()
         
@@ -152,7 +148,7 @@ class ProfileEditingVC: UIViewController {
             }
         }
         
-        Auth.auth().currentUser?.updatePassword(to: passwordField.text!) { error in
+        Auth.auth().currentUser?.updatePassword(to: oldPasswordField.text!) { error in
             if let error = error {
                 print(error)
                 let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
@@ -172,15 +168,19 @@ class ProfileEditingVC: UIViewController {
         }
         self.emailField.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(50)
-            $0.bottom.equalTo(self.passwordField.snp.top).inset(-15)
+            $0.bottom.equalTo(self.oldPasswordField.snp.top).inset(-15)
         }
-        self.passwordField.snp.makeConstraints {
+        self.oldPasswordField.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(50)
-            $0.top.equalTo(self.view.snp.centerY)
+            $0.centerY.equalTo(self.view)
+        }
+        self.newPasswordField.snp.makeConstraints {
+            $0.left.right.equalToSuperview().inset(50)
+            $0.top.equalTo(self.oldPasswordField.snp.bottom).inset(-15)
         }
         self.saveBtn.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(50)
-            $0.top.equalTo(passwordField.snp.bottom).inset(-15)
+            $0.top.equalTo(self.newPasswordField.snp.bottom).inset(-15)
         }
     }
     

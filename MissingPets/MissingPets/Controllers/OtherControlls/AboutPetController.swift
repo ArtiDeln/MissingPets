@@ -10,6 +10,8 @@ import UIKit
 class AboutPetController: UIViewController, UIScrollViewDelegate {
     
     public lazy var number = String()
+    
+    //MARK: -GUI
 
     private(set) lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -34,6 +36,30 @@ class AboutPetController: UIViewController, UIScrollViewDelegate {
         let name = UILabel()
         name.font = UIFont.boldSystemFont(ofSize: 20)
         return name
+    }()
+    
+    private(set) var petBreedLbl: UILabel = {
+        let breed = UILabel()
+        breed.font = UIFont.boldSystemFont(ofSize: 14)
+        return breed
+    }()
+    
+    private(set) var petGenderLbl: UILabel = {
+        let gender = UILabel()
+        gender.font = UIFont.boldSystemFont(ofSize: 14)
+        return gender
+    }()
+    
+    private(set) var petMissingAdressLbl: UILabel = {
+        let missingAddress = UILabel()
+        missingAddress.font = UIFont.boldSystemFont(ofSize: 14)
+        return missingAddress
+    }()
+    
+    private(set) var petAdditionalInfo: UILabel = {
+        let additionalInfo = UILabel()
+        additionalInfo.font = UIFont.boldSystemFont(ofSize: 14)
+        return additionalInfo
     }()
 
     private(set) var phoneBtn: UIButton = {
@@ -62,6 +88,10 @@ class AboutPetController: UIViewController, UIScrollViewDelegate {
         self.scrollView.addSubview(contentView)
         self.contentView.addSubview(self.petPhotoImg)
         self.contentView.addSubview(self.petTypeLbl)
+        self.contentView.addSubview(self.petBreedLbl)
+        self.contentView.addSubview(self.petGenderLbl)
+        self.contentView.addSubview(self.petMissingAdressLbl)
+        self.contentView.addSubview(self.petAdditionalInfo)
         self.contentView.addSubview(self.phoneBtn)
     }
 
@@ -82,8 +112,24 @@ class AboutPetController: UIViewController, UIScrollViewDelegate {
             $0.centerX.equalTo(contentView)
             $0.top.equalTo(petPhotoImg.snp.bottom).inset(-10)
         }
+        self.petBreedLbl.snp.makeConstraints {
+            $0.centerX.equalTo(contentView)
+            $0.top.equalTo(petTypeLbl.snp.bottom).inset(-10)
+        }
+        self.petGenderLbl.snp.makeConstraints {
+            $0.centerX.equalTo(contentView)
+            $0.top.equalTo(petBreedLbl.snp.bottom).inset(-10)
+        }
+        self.petMissingAdressLbl.snp.makeConstraints {
+            $0.centerX.equalTo(contentView)
+            $0.top.equalTo(petGenderLbl.snp.bottom).inset(-10)
+        }
+        self.petAdditionalInfo.snp.makeConstraints {
+            $0.centerX.equalTo(contentView)
+            $0.top.equalTo(petMissingAdressLbl.snp.bottom).inset(-10)
+        }
         self.phoneBtn.snp.makeConstraints {
-            $0.top.equalTo(petTypeLbl.snp.bottom).offset(10)
+            $0.top.equalTo(petAdditionalInfo.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
             $0.bottom.equalTo(self.contentView).offset(-20)
@@ -91,8 +137,7 @@ class AboutPetController: UIViewController, UIScrollViewDelegate {
     }
 
     @objc func callNumber() {
-//        print(number)
-        print("TEST!!!!")
+        print("Call button tapped")
         guard let number = URL(string: "tel://" + number) else { return }
         UIApplication.shared.open(number)
     }

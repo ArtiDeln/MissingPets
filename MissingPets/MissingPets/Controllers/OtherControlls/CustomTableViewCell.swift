@@ -10,16 +10,25 @@ import SnapKit
 
 class CustomTableViewCell : UITableViewCell {
         
-    var data : MissingPetsData? {
+    var dataMP : MissingPetsData? {
         didSet {
-            petNameTitleLbl.text = "Кличка: \(data!.petName)"
-            dataMissingAddressLbl.text = "Адрес: \(data!.missingAddress)"
-            dataImage.image = data?.petPhoto
-            phoneLbl.text = "Телефон: \(data!.phone)"
+            petNameTitleLbl.text = "Кличка: \(dataMP!.petName)"
+            dataMissingAddressLbl.text = "Адрес: \(dataMP!.missingAddress)"
+            dataImage.image = dataMP?.petPhoto
+            breedLbl.text = "Порода: \(dataMP!.petBreed)"
         }
     }
     
-    private(set) lazy var phoneLbl: UILabel = {
+    var dataFP : FoundedPetsData? {
+        didSet {
+            petNameTitleLbl.text = "Кличка: \(dataFP!.petName)"
+            dataMissingAddressLbl.text = "Адрес: \(dataFP!.missingAddress)"
+            dataImage.image = dataFP?.petPhoto
+            breedLbl.text = "Порода: \(dataFP!.petBreed)"
+        }
+    }
+    
+    private(set) lazy var breedLbl: UILabel = {
         let phone = UILabel()
         phone.textAlignment = .left
         return phone
@@ -66,7 +75,7 @@ class CustomTableViewCell : UITableViewCell {
     private func initView() {
         self.addSubview(self.dataImage)
         self.addSubview(self.petNameTitleLbl)
-        self.addSubview(self.phoneLbl)
+        self.addSubview(self.breedLbl)
         self.addSubview(self.dataMissingAddressLbl)
     }
     
@@ -77,17 +86,17 @@ class CustomTableViewCell : UITableViewCell {
         }
         self.dataImage.snp.makeConstraints {
             $0.top.equalTo(self.petNameTitleLbl.snp.bottom)
-            $0.left.equalToSuperview()
+            $0.left.equalToSuperview().inset(10)
             $0.size.equalTo(80)
         }
-        self.phoneLbl.snp.makeConstraints {
+        self.breedLbl.snp.makeConstraints {
             $0.left.equalTo(self.dataImage.snp.right).inset(-10)
             $0.top.equalTo(self.petNameTitleLbl.snp.bottom).inset(-10)
         }
         
         self.dataMissingAddressLbl.snp.makeConstraints {
             $0.left.equalTo(self.dataImage.snp.right).inset(-10)
-            $0.top.equalTo(self.phoneLbl.snp.bottom).inset(-10)
+            $0.top.equalTo(self.breedLbl.snp.bottom).inset(-10)
         }
     }
 }
@@ -97,6 +106,18 @@ struct MissingPetsData {
     var petName: String
     var petBreed: String
     var petType: String
+    var petGender: String
+    var missingAddress: String
+    var additionalInfo: String
+    var phone: String
+}
+
+struct FoundedPetsData {
+    var petPhoto: UIImage
+    var petName: String
+    var petBreed: String
+    var petType: String
+    var petGender: String
     var missingAddress: String
     var additionalInfo: String
     var phone: String

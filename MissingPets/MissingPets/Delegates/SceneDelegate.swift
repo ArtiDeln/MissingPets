@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
+        
         handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             if ((user) != nil) {
                 print("User logged in")
@@ -28,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 self?.window?.rootViewController = AuthVC
             }
         }
+        
         window?.makeKeyAndVisible()
         window?.windowScene = windowScene
     }

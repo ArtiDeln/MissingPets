@@ -32,6 +32,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         petPhoto.image = UIImage(named: "AddPhotoImage")
         petPhoto.contentMode = .scaleAspectFit
         petPhoto.layer.borderWidth = 1
+        petPhoto.backgroundColor = .white
         petPhoto.layer.borderColor = UIColor.gray.cgColor
         petPhoto.isUserInteractionEnabled = true
         petPhoto.layer.cornerRadius = 10
@@ -91,6 +92,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         phoneNumber.borderStyle = .roundedRect
         phoneNumber.placeholder = "Телефон владельца"
         phoneNumber.autocapitalizationType = .none
+        phoneNumber.keyboardType = .numbersAndPunctuation
         return phoneNumber
     }()
     
@@ -192,7 +194,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         uploadPetPhoto(photo: petImgView.image!) { (result) in
             switch result {
             case .success(let url):
-                Firestore.firestore().collection("Test iOS Missing Animals").addDocument(data: ["photo": url.absoluteString,
+                Firestore.firestore().collection("Missing Animals").addDocument(data: ["photo": url.absoluteString,
                                                                                                 "name": petNickname,
                                                                                                 "type": petType,
                                                                                                 "breed": petBreed,
@@ -228,7 +230,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
     }
     
     private func uploadPetPhoto(photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
-        let ref = Storage.storage().reference().child("Test iOS Animal Photo").child("\(user?.email ?? "UnidentifiedUser")-\(Date().toMillis)")
+        let ref = Storage.storage().reference().child("Animal Images").child("\(user?.email ?? "UnidentifiedUser")-\(Date().toMillis)")
         
         guard let imageData = petImgView.image?.jpegData(compressionQuality: 0.5) else { return }
         
@@ -277,7 +279,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
             $0.centerX.equalTo(self.contentView)
         }
         self.switchSgmntdCntrl.snp.makeConstraints {
-            $0.top.equalTo(petImgView.snp.bottom).offset(10)
+            $0.top.equalTo(self.petImgView.snp.bottom).offset(10)
             $0.width.equalTo(200)
             $0.centerX.equalTo(self.contentView)
         }
@@ -321,6 +323,43 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
             $0.bottom.equalTo(self.contentView).offset(-20)
+        }
+    }
+}
+
+extension AddPetVC {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+
+    @objc func keyboardWillChange(notification: NSNotification) {
+
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if petMissingAddressTxtFld.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height
+            }
+            if phoneNumberTxtFld.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height
+            }
+            if additionalInfoTxtFld.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height
+            }
         }
     }
 }

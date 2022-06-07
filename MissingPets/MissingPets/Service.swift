@@ -5,31 +5,95 @@
 //  Created by Artyom Butorin on 3.06.22.
 //
 
-import Foundation
+import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseFirestore
 
-//class Service {
-//    static let shared = Service()
-//
-//    func auth(_ data: logIn, ){
-//        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
-//            guard let strongSelf = self else {
-//                return
-//            }
-//            guard error == nil else {
-//                strongSelf.showCreateAccount(email: email, password: password)
-//                return
-//            }
-//            let user = result?.user
-//            print("Logged in user: \(String(describing: user))")
-//        })
-//    }
-//
-//}
-
-import UIKit
-
-
+class Service {
+    
+    static let shared = Service()
+    
+    func getMissingPetsData(completion: @escaping ([MissingPetsData]) -> ()) {
+        
+        Firestore.firestore().collection("Missing Animals").whereField("status", isEqualTo: "missing").getDocuments { snap, err in
+            if err == nil {
+                var petList = [MissingPetsData]()
+                if let docs = snap?.documents {
+                    for doc in docs {
+                        let data = doc.data()
+                        var imgData = Data()
+                        if let url = URL(string: data["photo"] as? String ?? "No photo") {
+                            do {
+                                let dataImage: Data = try Data(contentsOf: url)
+                                imgData = dataImage
+                            } catch {
+                                print(error)
+                            }
+                        }
+                        let name = data["name"] as? String ?? "Неизвестна"
+                        let phone = data["phone"] as? String ?? "Неизвестен"
+                        let breed = data["breed"] as? String ?? "Неизвестно"
+                        let type = data["type"] as? String ?? "Неизвестен"
+                        let gender = data["gender"] as? String ?? "Неизвестен"
+                        let missingAddress = data["missingAddress"] as? String ?? "Неизвестен"
+                        let additionalInfo = data["additionalInfo"] as? String ?? "Отсутствует"
+                        
+                        petList.append(MissingPetsData(petPhoto: UIImage(data: imgData)!,
+                                                       petName: name,
+                                                       petBreed: breed,
+                                                       petType: type,
+                                                       petGender: gender,
+                                                       missingAddress: missingAddress,
+                                                       additionalInfo: additionalInfo,
+                                                       phone: phone))
+                    }
+                }
+                completion(petList)
+            }
+        }
+    }
+    
+    func getFoundedPetsData(completion: @escaping ([FoundedPetsData]) -> ()) {
+        
+        Firestore.firestore().collection("Missing Animals").whereField("status", isEqualTo: "founded").getDocuments { snap, err in
+            if err == nil {
+                var petList = [FoundedPetsData]()
+                if let docs = snap?.documents {
+                    for doc in docs {
+                        let data = doc.data()
+                        var imgData = Data()
+                        if let url = URL(string: data["photo"] as? String ?? "No photo") {
+                            do {
+                                let dataImage: Data = try Data(contentsOf: url)
+                                imgData = dataImage
+                            } catch {
+                                print(error)
+                            }
+                        }
+                        let name = data["name"] as? String ?? "Неизвестна"
+                        let phone = data["phone"] as? String ?? "Неизвестен"
+                        let breed = data["breed"] as? String ?? "Неизвестно"
+                        let type = data["type"] as? String ?? "Неизвестен"
+                        let gender = data["gender"] as? String ?? "Неизвестен"
+                        let missingAddress = data["missingAddress"] as? String ?? "Неизвестен"
+                        let additionalInfo = data["additionalInfo"] as? String ?? "Отсутствует"
+                        
+                        petList.append(FoundedPetsData(petPhoto: UIImage(data: imgData)!,
+                                                       petName: name,
+                                                       petBreed: breed,
+                                                       petType: type,
+                                                       petGender: gender,
+                                                       missingAddress: missingAddress,
+                                                       additionalInfo: additionalInfo,
+                                                       phone: phone))
+                    }
+                }
+                completion(petList)
+            }
+        }
+    }
+    
+}
