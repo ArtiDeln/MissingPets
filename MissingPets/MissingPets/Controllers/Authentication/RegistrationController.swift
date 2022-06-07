@@ -90,7 +90,6 @@ class RegistrationVC: UIViewController {
             return
         }
         
-        
         FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] result, error in
             
             guard let _ = self else { return } //let strongSelf = self

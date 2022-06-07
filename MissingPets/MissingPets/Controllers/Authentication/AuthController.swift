@@ -90,7 +90,7 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     }
     
     //MARK: - @objc functions
-
+    
     @objc private func didTapLogInBtn() {
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
@@ -114,11 +114,11 @@ class AuthVC: UIViewController, UITextFieldDelegate {
             print("Logged in user: \(String(describing: user))")
         })
     }
-        
+    
     @objc private func didTapSignInBtn() {
         let rootVC = RegistrationVC()
         let navController = UINavigationController(rootViewController: rootVC)
-
+        
         rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад",
                                                                   style: .plain,
                                                                   target: self,
@@ -134,12 +134,19 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     //MARK: - Functions
     
     func showCreateAccount(email: String, password: String) {
-        let alert = UIAlertController(title: "Учетная запись отсутствует", message: "Хотите создать аккаунт?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Почта или пароль не совпадают", message: "Хотите создать аккаунт?", preferredStyle: .alert)
         let createBtn = UIAlertAction(title: "Создать", style: .default) { (alert) in
             self.didTapSignInBtn()
         }
+        let forgotBtn = UIAlertAction(title: "Восстановить пароль", style: .default) { (alert) in
+            if let email = self.emailField.text {
+                Auth.auth().sendPasswordReset(withEmail: email) { error in
+                    print(error ?? "")
+                }
+            }
+        }
         let cancelBtn = UIAlertAction(title: "Отмена", style: .default, handler: .none)
-        
+        alert.addAction(forgotBtn)
         alert.addAction(createBtn)
         alert.addAction(cancelBtn)
         

@@ -16,9 +16,11 @@
 		9A1AC6BC283518AC009E7BE0 /* MissingPetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */; };
 		9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */; };
 		9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1AC6BF283519CC009E7BE0 /* MapController.swift */; };
+		9A3ACCCD284D8B6F000728D5 /* AboutPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3ACCCC284D8B6E000728D5 /* AboutPetController.swift */; };
 		9A4EBB9D28453BAF00BD41D4 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBB9C28453BAF00BD41D4 /* RegistrationController.swift */; };
 		9A4EBBA32845779500BD41D4 /* ProfileEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */; };
 		9A4EBBA528457C5D00BD41D4 /* MyAnnounsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */; };
+		9A593408284ADA4000E9A8F2 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A593407284ADA4000E9A8F2 /* CustomTableViewCell.swift */; };
 		9A70E610283B001400D03B92 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70E60F283B001400D03B92 /* AuthController.swift */; };
 		9A98E4F82847FEC600C97A85 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */; };
 		9A98E4FA28480C0200C97A85 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E4F928480C0200C97A85 /* StorageManager.swift */; };
@@ -45,9 +47,11 @@
 		9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingPetsController.swift; sourceTree = "<group>"; };
 		9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		9A1AC6BF283519CC009E7BE0 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		9A3ACCCC284D8B6E000728D5 /* AboutPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPetController.swift; sourceTree = "<group>"; };
 		9A4EBB9C28453BAF00BD41D4 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditingController.swift; sourceTree = "<group>"; };
 		9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnounsController.swift; sourceTree = "<group>"; };
+		9A593407284ADA4000E9A8F2 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		9A70E60F283B001400D03B92 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		9A98E4F72847FEC600C97A85 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		9A98E4F928480C0200C97A85 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -151,11 +155,21 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		9A593403284AD9F500E9A8F2 /* MissingPets */ = {
+			isa = PBXGroup;
+			children = (
+				9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */,
+				9A593407284ADA4000E9A8F2 /* CustomTableViewCell.swift */,
+				9A3ACCCC284D8B6E000728D5 /* AboutPetController.swift */,
+			);
+			path = MissingPets;
+			sourceTree = "<group>";
+		};
 		9A70E611283B002300D03B92 /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
 				9A1AC6B928351754009E7BE0 /* TabBarController.swift */,
-				9A1AC6BB283518AC009E7BE0 /* MissingPetsController.swift */,
+				9A593403284AD9F500E9A8F2 /* MissingPets */,
 				9AA4361C283AE50400E678D3 /* FoundPetsController.swift */,
 				9A1AC6A82835156D009E7BE0 /* AddController.swift */,
 				9A4EBBA12845772B00BD41D4 /* Profile */,
@@ -312,6 +326,7 @@
 				9A1AC6C0283519CC009E7BE0 /* MapController.swift in Sources */,
 				9A98E4F82847FEC600C97A85 /* DatabaseManager.swift in Sources */,
 				9A1AC6BA28351754009E7BE0 /* TabBarController.swift in Sources */,
+				9A593408284ADA4000E9A8F2 /* CustomTableViewCell.swift in Sources */,
 				9A1AC6A52835156D009E7BE0 /* AppDelegate.swift in Sources */,
 				9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */,
 				9A98E4FE284976A200C97A85 /* Service.swift in Sources */,
@@ -321,6 +336,7 @@
 				9A1AC6A72835156D009E7BE0 /* SceneDelegate.swift in Sources */,
 				9A4EBBA528457C5D00BD41D4 /* MyAnnounsController.swift in Sources */,
 				9AA4361D283AE50400E678D3 /* FoundPetsController.swift in Sources */,
+				9A3ACCCD284D8B6F000728D5 /* AboutPetController.swift in Sources */,
 				9A1AC6BC283518AC009E7BE0 /* MissingPetsController.swift in Sources */,
 				9A4EBB9D28453BAF00BD41D4 /* RegistrationController.swift in Sources */,
 				9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */,

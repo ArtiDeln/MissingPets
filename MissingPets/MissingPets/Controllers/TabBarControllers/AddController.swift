@@ -135,32 +135,32 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
     //MARK: - Initialization
     
     func initView() {
-        self.view.addSubview(scrollView)
-        self.scrollView.addSubview(contentView)
-        self.contentView.addSubview(petImgView)
-        self.contentView.addSubview(switchSgmntdCntrl)
-        self.contentView.addSubview(petNicknameTxtFld)
-        self.contentView.addSubview(petTypeTxtFld)
-        self.contentView.addSubview(petBreedTxtFld)
-        self.contentView.addSubview(petGenderTxtFld)
-        self.contentView.addSubview(petMissingAddressTxtFld)
-        self.contentView.addSubview(phoneNumberTxtFld)
-        self.contentView.addSubview(additionalInfoTxtFld)
-        self.contentView.addSubview(publishBtn)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.contentView)
+        self.contentView.addSubview(self.petImgView)
+        self.contentView.addSubview(self.switchSgmntdCntrl)
+        self.contentView.addSubview(self.petNicknameTxtFld)
+        self.contentView.addSubview(self.petTypeTxtFld)
+        self.contentView.addSubview(self.petBreedTxtFld)
+        self.contentView.addSubview(self.petGenderTxtFld)
+        self.contentView.addSubview(self.petMissingAddressTxtFld)
+        self.contentView.addSubview(self.phoneNumberTxtFld)
+        self.contentView.addSubview(self.additionalInfoTxtFld)
+        self.contentView.addSubview(self.publishBtn)
     }
     
     //MARK: - @objc functions
     
-    var variable = "missing"
+    var petStatus = "missing"
     @objc func didSegmentValueChange(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 0: variable = "missing"
+        case 0: petStatus = "missing"
             phoneNumberTxtFld.placeholder = "Телефон владельца"
-            petNicknameTxtFld.isHidden = false
-        case 1: variable = "founded"
+            petNicknameTxtFld.placeholder = "Кличка"
+        case 1: petStatus = "founded"
             phoneNumberTxtFld.placeholder = "Телефон нашедшего"
-            petNicknameTxtFld.isHidden = true
-        default: variable = "missing"
+            petNicknameTxtFld.placeholder = "Кличка, если известна"
+        default: petStatus = "missing"
         }
     }
     
@@ -180,7 +180,6 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
               let petMissingAddress = petMissingAddressTxtFld.text,
               let phoneNumber = phoneNumberTxtFld.text,
               let additionalInfo = additionalInfoTxtFld.text,
-              !petNickname.isEmpty,
               !petType.isEmpty,
               !petBreed.isEmpty,
               !petGender.isEmpty,
@@ -201,7 +200,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
                                                                                                 "missingAddress": petMissingAddress,
                                                                                                 "phone": phoneNumber,
                                                                                                 "additionalInfo": additionalInfo,
-                                                                                                "status": self.variable,
+                                                                                                "status": self.petStatus,
                                                                                                 "owner": self.user!.uid]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
@@ -209,17 +208,6 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
                         print("Document successfully written!")
                     }
                 }
-                
-//                self.ref.child("Test iOS Missing Animals").childByAutoId().setValue(["photo": url.absoluteString,
-//                                                                                     "name": petNickname,
-//                                                                                     "type": petType,
-//                                                                                     "breed": petBreed,
-//                                                                                     "gender": petGender,
-//                                                                                     "missingAddress": petMissingAddress,
-//                                                                                     "phone": phoneNumber,
-//                                                                                     "additionalInfo": additionalInfo,
-//                                                                                     "status": self.variable,
-//                                                                                     "owner": self.user?.uid])
             case .failure:
                 print("error data added")
                 return
@@ -276,111 +264,63 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
     //MARK: - Constraints
     
     private func constraints() {
-        scrollView.snp.makeConstraints {
+        self.scrollView.snp.makeConstraints {
             $0.edges.equalTo(self.view)
         }
-        contentView.snp.makeConstraints {
+        self.contentView.snp.makeConstraints {
             $0.top.bottom.equalTo(self.scrollView)
             $0.width.equalTo(self.view)
         }
-        petImgView.snp.makeConstraints {
+        self.petImgView.snp.makeConstraints {
             $0.top.equalTo(self.contentView)
             $0.size.equalTo(120)
             $0.centerX.equalTo(self.contentView)
         }
-        switchSgmntdCntrl.snp.makeConstraints {
+        self.switchSgmntdCntrl.snp.makeConstraints {
             $0.top.equalTo(petImgView.snp.bottom).offset(10)
             $0.width.equalTo(200)
             $0.centerX.equalTo(self.contentView)
         }
-        petNicknameTxtFld.snp.makeConstraints {
+        self.petNicknameTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.switchSgmntdCntrl.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
         }
-        petTypeTxtFld.snp.makeConstraints {
+        self.petTypeTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petNicknameTxtFld.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
         }
-        petBreedTxtFld.snp.makeConstraints {
+        self.petBreedTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petTypeTxtFld.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
         }
-        petGenderTxtFld.snp.makeConstraints {
+        self.petGenderTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petBreedTxtFld.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
         }
-        petMissingAddressTxtFld.snp.makeConstraints {
+        self.petMissingAddressTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petGenderTxtFld.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
         }
-        phoneNumberTxtFld.snp.makeConstraints {
+        self.phoneNumberTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.petMissingAddressTxtFld.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
         }
-        additionalInfoTxtFld.snp.makeConstraints {
+        self.additionalInfoTxtFld.snp.makeConstraints {
             $0.top.equalTo(self.phoneNumberTxtFld.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
         }
-        publishBtn.snp.makeConstraints {
-            $0.top.equalTo(additionalInfoTxtFld.snp.bottom).offset(10)
+        self.publishBtn.snp.makeConstraints {
+            $0.top.equalTo(self.additionalInfoTxtFld.snp.bottom).offset(10)
             $0.width.equalTo(self.contentView).inset(50)
             $0.centerX.equalTo(self.contentView)
             $0.bottom.equalTo(self.contentView).offset(-20)
         }
-    }
-}
-
-//MARK: - Choose pet picture
-
-extension AddPetVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    @objc func presentPhotoActionSheet() {
-        let actionSheet = UIAlertController(title: "Выберите фото", message: nil, preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-        actionSheet.addAction(UIAlertAction(title: "Сделать фото", style: .default, handler: { [weak self] _ in
-            self?.presentCamera()
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Выбрать фото", style: .default, handler: { [weak self] _ in
-            self?.presentPhotoPicker()
-        }))
-        
-        present(actionSheet, animated: true)
-    }
-    
-    func presentCamera() {
-        let vc = UIImagePickerController()
-        vc.sourceType = .camera
-        vc.delegate = self
-        vc.allowsEditing = true
-        present(vc, animated: true)
-    }
-    
-    func presentPhotoPicker() {
-        let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
-        vc.delegate = self
-        vc.allowsEditing = true
-        present(vc, animated: true)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
-            return
-        }
-        print(info)
-        
-        self.petImgView.image = selectedImage
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
     }
 }
