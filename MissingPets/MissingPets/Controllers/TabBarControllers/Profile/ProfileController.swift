@@ -21,7 +21,7 @@ class ProfileVC: UIViewController {
     
     //MARK: - GUI
     
-    private(set) lazy var emailLabel: UILabel = {
+    private(set) lazy var nameLbl: UILabel = {
         let email = UILabel()
         return email
     }()
@@ -78,7 +78,7 @@ class ProfileVC: UIViewController {
     }
     
     private func initView() {
-        self.view.addSubview(emailLabel)
+        self.view.addSubview(nameLbl)
         self.view.addSubview(myAnnounsBtn)
         self.view.addSubview(profileEditBtn)
         self.view.addSubview(logOutBtn)
@@ -120,7 +120,7 @@ class ProfileVC: UIViewController {
                         return
                     }
                     let userName = data["name"] as? String ?? "UnidentifiedUser"
-                    self.emailLabel.text = userName
+                    self.nameLbl.text = userName
                     print("User name = \(userName)")
                 }
         }
@@ -129,19 +129,19 @@ class ProfileVC: UIViewController {
     //MARK: - Constraints
     
     private func constraints() {
-        emailLabel.snp.makeConstraints {
+        self.nameLbl.snp.makeConstraints {
             $0.centerX.equalTo(self.view)
             $0.bottom.equalTo(self.myAnnounsBtn.snp.top).inset(-20)
         }
-        myAnnounsBtn.snp.makeConstraints {
+        self.myAnnounsBtn.snp.makeConstraints {
             $0.left.right.equalTo(self.view).inset(60)
             $0.centerY.equalTo(self.view)
         }
-        profileEditBtn.snp.makeConstraints {
+        self.profileEditBtn.snp.makeConstraints {
             $0.left.right.equalTo(self.view).inset(60)
             $0.top.equalTo(self.myAnnounsBtn.snp.bottom).inset(-20)
         }
-        logOutBtn.snp.makeConstraints {
+        self.logOutBtn.snp.makeConstraints {
             $0.right.left.equalTo(self.view).inset(60)
             $0.bottom.equalTo(self.view).inset(100)
         }

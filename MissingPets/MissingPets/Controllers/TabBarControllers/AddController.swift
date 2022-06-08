@@ -13,6 +13,8 @@ import FirebaseFirestore
 
 class AddPetVC: UIViewController, UIScrollViewDelegate {
     
+    var photoURL = String()
+    
     private(set) lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         return scroll
@@ -183,8 +185,6 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
               let phoneNumber = phoneNumberTxtFld.text,
               let additionalInfo = additionalInfoTxtFld.text,
               !petType.isEmpty,
-              !petBreed.isEmpty,
-              !petGender.isEmpty,
               !petMissingAddress.isEmpty,
               !phoneNumber.isEmpty else {
             errorAlert()
@@ -194,28 +194,36 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         uploadPetPhoto(photo: petImgView.image!) { (result) in
             switch result {
             case .success(let url):
-                Firestore.firestore().collection("Missing Animals").addDocument(data: ["photo": url.absoluteString,
-                                                                                                "name": petNickname,
-                                                                                                "type": petType,
-                                                                                                "breed": petBreed,
-                                                                                                "gender": petGender,
-                                                                                                "missingAddress": petMissingAddress,
-                                                                                                "phone": phoneNumber,
-                                                                                                "additionalInfo": additionalInfo,
-                                                                                                "status": self.petStatus,
-                                                                                                "owner": self.user!.uid]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("Document successfully written!")
-                    }
-                }
+                self.photoURL = url.absoluteString
+                print("Записалось \(self.photoURL)")
+                
             case .failure:
                 print("error data added")
                 return
             }
         }
-        clearAllItems()
+        
+        Firestore.firestore().collection("Missing Animals").addDocument(data: ["photo": photoURL,
+                                                                               "name": petNickname,
+                                                                               "type": petType,
+                                                                               "breed": petBreed,
+                                                                               "gender": petGender,
+                                                                               "missingAddress": petMissingAddress,
+                                                                               "phone": phoneNumber,
+                                                                               "additionalInfo": additionalInfo,
+                                                                               "status": self.petStatus,
+                                                                               "owner": self.user!.uid]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                let alert = UIAlertController(title: "Объявление успешно созданно", message: nil, preferredStyle: .actionSheet)
+                let action = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(action)
+                self.present(alert, animated: true)
+                print("Document successfully written!")
+                self.clearAllItems()
+            }
+        }
     }
     
     private func clearAllItems() {
@@ -256,9 +264,9 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         let alertController = UIAlertController(title: "Заполните все поля!",
                                                 message: "Поле доп. информация не обязательна к заполнению",
                                                 preferredStyle: .alert)
-        let action          = UIAlertAction(title: "OK",
-                                            style: .default,
-                                            handler: .none)
+        let action = UIAlertAction(title: "OK",
+                                   style: .default,
+                                   handler: .none)
         alertController.addAction(action)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -331,15 +339,15 @@ extension AddPetVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -347,9 +355,9 @@ extension AddPetVC {
     @objc func keyboardWillHide() {
         self.view.frame.origin.y = 0
     }
-
+    
     @objc func keyboardWillChange(notification: NSNotification) {
-
+        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if petMissingAddressTxtFld.isFirstResponder {
                 self.view.frame.origin.y = -keyboardSize.height

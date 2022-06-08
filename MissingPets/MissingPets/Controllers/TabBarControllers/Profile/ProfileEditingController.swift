@@ -128,7 +128,7 @@ class ProfileEditingVC: UIViewController {
                 }
         }
         
-        self.updateUserEmailWithPassword()
+        self.updateUserEmailAndPassword()
         
         let alert = UIAlertController(title: "Изменено успешно", message: nil, preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "OK", style: .default)
@@ -136,7 +136,7 @@ class ProfileEditingVC: UIViewController {
         self.present(alert, animated: true)
     }
     
-    private func updateUserEmailWithPassword() {
+    private func updateUserEmailAndPassword() {
         
         Auth.auth().currentUser?.updateEmail(to: emailField.text!) { error in
             if let error = error {

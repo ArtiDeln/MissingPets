@@ -104,9 +104,15 @@ class Service {
             if err == nil {
                 var petList = [MyPetsData]()
                 if let docs = snap?.documents {
+                    var docID = String()
                     for doc in docs {
+                        if doc == doc {
+                            docID = doc.documentID
+                            print("Document id === \(docID)")
+                        }
                         let data = doc.data()
                         var imgData = Data()
+                        
                         if let url = URL(string: data["photo"] as? String ?? "No photo") {
                             do {
                                 let dataImage: Data = try Data(contentsOf: url)
@@ -116,6 +122,7 @@ class Service {
                             }
                         }
                         let name = data["name"] as? String ?? "Неизвестна"
+                        print("\(name) == \(docID)")
                         let phone = data["phone"] as? String ?? "Неизвестен"
                         let breed = data["breed"] as? String ?? "Неизвестно"
                         let type = data["type"] as? String ?? "Неизвестен"
@@ -124,13 +131,14 @@ class Service {
                         let additionalInfo = data["additionalInfo"] as? String ?? "Отсутствует"
                         
                         petList.append(MyPetsData(petPhoto: UIImage(data: imgData)!,
-                                                       petName: name,
-                                                       petBreed: breed,
-                                                       petType: type,
-                                                       petGender: gender,
-                                                       missingAddress: missingAddress,
-                                                       additionalInfo: additionalInfo,
-                                                       phone: phone))
+                                                  petName: name,
+                                                  petBreed: breed,
+                                                  petType: type,
+                                                  petGender: gender,
+                                                  missingAddress: missingAddress,
+                                                  additionalInfo: additionalInfo,
+                                                  phone: phone,
+                                                  petID: docID))
                     }
                 }
                 completion(petList)
@@ -171,4 +179,5 @@ struct MyPetsData {
     var missingAddress: String
     var additionalInfo: String
     var phone: String
+    var petID: String
 }

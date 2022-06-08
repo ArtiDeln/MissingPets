@@ -29,6 +29,7 @@
 		9AA3B94328442DB40034CC1B /* VetsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3B94228442DB40034CC1B /* VetsModel.swift */; };
 		9AA4361B283A966A00E678D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */; };
 		9AA4361D283AE50400E678D3 /* FoundPetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA4361C283AE50400E678D3 /* FoundPetsController.swift */; };
+		9AB05803285134C800E013DD /* MyAnnounsEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB05802285134C800E013DD /* MyAnnounsEditController.swift */; };
 		D4C5EFB179710908F1FD800A /* Pods_MissingPets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457CE62B00339BDAF0A3F87B /* Pods_MissingPets.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		9AA3B94228442DB40034CC1B /* VetsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VetsModel.swift; sourceTree = "<group>"; };
 		9AA4361A283A966A00E678D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9AA4361C283AE50400E678D3 /* FoundPetsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundPetsController.swift; sourceTree = "<group>"; };
+		9AB05802285134C800E013DD /* MyAnnounsEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnnounsEditController.swift; sourceTree = "<group>"; };
 		D52BD67C4132EB292A37D642 /* Pods-MissingPets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MissingPets.release.xcconfig"; path = "Target Support Files/Pods-MissingPets/Pods-MissingPets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +151,7 @@
 				9A1AC6BD283519B0009E7BE0 /* ProfileController.swift */,
 				9A4EBBA22845779500BD41D4 /* ProfileEditingController.swift */,
 				9A4EBBA428457C5D00BD41D4 /* MyAnnounsController.swift */,
+				9AB05802285134C800E013DD /* MyAnnounsEditController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				9A1AC6BC283518AC009E7BE0 /* MissingPetsController.swift in Sources */,
 				9A4EBB9D28453BAF00BD41D4 /* RegistrationController.swift in Sources */,
 				9A1AC6BE283519B0009E7BE0 /* ProfileController.swift in Sources */,
+				9AB05803285134C800E013DD /* MyAnnounsEditController.swift in Sources */,
 				9A98E4FA28480C0200C97A85 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
