@@ -13,7 +13,15 @@ import FirebaseFirestore
 
 class AddPetVC: UIViewController, UIScrollViewDelegate {
     
+    //MARK: - Variable
+    
     var photoURL = String()
+    var ref: DatabaseReference!
+    
+    let user = Auth.auth().currentUser
+    let status = ["Пропал", "Найден"]
+
+    //MARK: - GUI
     
     private(set) lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -24,11 +32,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         let contentView = UIView()
         return contentView
     }()
-    
-    let status = ["Пропал", "Найден"]
-    
-    //MARK: - GUI
-    
+            
     private(set) lazy var petImgView: UIImageView = {
         let petPhoto = UIImageView()
         petPhoto.image = UIImage(named: "AddPhotoImage")
@@ -50,76 +54,72 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
     }()
     
     private(set) lazy var petNicknameTxtFld: UITextField = {
-        let nickname = UITextField()
-        nickname.borderStyle = .roundedRect
-        nickname.placeholder = "Кличка"
-        nickname.autocapitalizationType = .none
-        return nickname
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Кличка"
+        return txtFld
     }()
     
     private(set) lazy var petTypeTxtFld: UITextField = {
-        let petType = UITextField()
-        petType.borderStyle = .roundedRect
-        petType.placeholder = "Вид питомца"
-        petType.autocapitalizationType = .none
-        return petType
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Вид питомца"
+        return txtFld
     }()
     
     private(set) lazy var petBreedTxtFld: UITextField = {
-        let petBreed = UITextField()
-        petBreed.borderStyle = .roundedRect
-        petBreed.placeholder = "Порода"
-        petBreed.autocapitalizationType = .none
-        return petBreed
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Порода"
+        return txtFld
     }()
     
     private(set) lazy var petGenderTxtFld: UITextField = {
-        let petGender = UITextField()
-        petGender.borderStyle = .roundedRect
-        petGender.placeholder = "Пол"
-        petGender.autocapitalizationType = .none
-        return petGender
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Пол"
+        return txtFld
     }()
     
     private(set) lazy var petMissingAddressTxtFld: UITextField = {
-        let petMissingAddress = UITextField()
-        petMissingAddress.borderStyle = .roundedRect
-        petMissingAddress.placeholder = "Адрес пропажи"
-        petMissingAddress.autocapitalizationType = .none
-        return petMissingAddress
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Адрес пропажи"
+        return txtFld
     }()
     
     private(set) lazy var phoneNumberTxtFld: UITextField = {
-        let phoneNumber = UITextField()
-        phoneNumber.borderStyle = .roundedRect
-        phoneNumber.placeholder = "Телефон владельца"
-        phoneNumber.autocapitalizationType = .none
-        phoneNumber.keyboardType = .numbersAndPunctuation
-        return phoneNumber
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Телефон владельца"
+        txtFld.keyboardType = .numbersAndPunctuation
+        return txtFld
     }()
     
     private(set) lazy var additionalInfoTxtFld: UITextField = {
-        let additionalInfo = UITextField()
-        additionalInfo.borderStyle = .roundedRect
-        additionalInfo.placeholder = "Доп. информация"
-        additionalInfo.autocapitalizationType = .none
-        return additionalInfo
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Доп. информация"
+        return txtFld
     }()
     
     private(set) lazy var publishBtn: UIButton = {
-        let publish = UIButton()
-        publish.setTitle("Опубликовать", for: .normal)
-        publish.addTarget(self, action: #selector(didPublishBtnTapped), for: .touchUpInside)
-        publish.backgroundColor = .systemBlue
-        publish.layer.cornerRadius = 10
-        return publish
+        let btn = UIButton()
+        btn.setTitle("Опубликовать", for: .normal)
+        btn.addTarget(self, action: #selector(didPublishBtnTapped), for: .touchUpInside)
+        btn.backgroundColor = .systemBlue
+        btn.layer.cornerRadius = 10
+        return btn
     }()
     
     //MARK: - ViewDidLoad
-    
-    var ref: DatabaseReference!
-    
-    let user = Auth.auth().currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()

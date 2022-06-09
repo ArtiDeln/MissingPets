@@ -1,5 +1,5 @@
 //
-//  MyAnnounsEditController.swift
+//  MyAnnounceEditController.swift
 //  MissingPets
 //
 //  Created by Artyom Butorin on 8.06.22.
@@ -8,13 +8,13 @@
 import UIKit
 import FirebaseFirestore
 
-class MyAnnouncEditVC: UIViewController, UIScrollViewDelegate {
+class MyAnnounceEditVC: UIViewController, UIScrollViewDelegate, UITextFieldDelegate {
     
-    public lazy var number = String()
+    //MARK: - Variable
     
     public lazy var myPetID = String()
     
-    //MARK: -GUI
+    //MARK: - GUI
     
     private(set) lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -36,66 +36,66 @@ class MyAnnouncEditVC: UIViewController, UIScrollViewDelegate {
     }()
     
     private(set) lazy var petNameTxtFld: UITextField = {
-        let name = UITextField()
-        name.borderStyle = .roundedRect
-        name.placeholder = "Кличка"
-        name.textAlignment = .center
-        name.autocapitalizationType = .none
-        return name
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Кличка"
+        txtFld.textAlignment = .center
+        return txtFld
     }()
     
     private(set) lazy var petTypeTxtFld: UITextField = {
-        let type = UITextField()
-        type.borderStyle = .roundedRect
-        type.placeholder = "Тип"
-        type.textAlignment = .center
-        type.autocapitalizationType = .none
-        return type
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Тип"
+        txtFld.textAlignment = .center
+        return txtFld
     }()
     
     private(set) lazy var petBreedTxtFld: UITextField = {
-        let breed = UITextField()
-        breed.borderStyle = .roundedRect
-        breed.placeholder = "Порода"
-        breed.textAlignment = .center
-        breed.autocapitalizationType = .none
-        return breed
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Порода"
+        txtFld.textAlignment = .center
+        return txtFld
     }()
     
     private(set) lazy var petGenderTxtFld: UITextField = {
-        let gender = UITextField()
-        gender.borderStyle = .roundedRect
-        gender.placeholder = "Пол"
-        gender.textAlignment = .center
-        gender.autocapitalizationType = .none
-        return gender
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Пол"
+        txtFld.textAlignment = .center
+        return txtFld
     }()
     
     private(set) lazy var petMissingAdressTxtFld: UITextField = {
-        let missingAddress = UITextField()
-        missingAddress.borderStyle = .roundedRect
-        missingAddress.placeholder = "Адрес"
-        missingAddress.textAlignment = .center
-        missingAddress.autocapitalizationType = .none
-        return missingAddress
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Адрес"
+        txtFld.textAlignment = .center
+        return txtFld
     }()
     
     private(set) lazy var petAdditionalInfoTxtFld: UITextField = {
-        let additionalInfo = UITextField()
-        additionalInfo.borderStyle = .roundedRect
-        additionalInfo.placeholder = "Доп. информация"
-        additionalInfo.textAlignment = .center
-        additionalInfo.autocapitalizationType = .none
-        return additionalInfo
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Доп. информация"
+        txtFld.textAlignment = .center
+        return txtFld
     }()
     
     private(set) lazy var phoneTxtFld: UITextField = {
-        let phone = UITextField()
-        phone.borderStyle = .roundedRect
-        phone.placeholder = "Номер телефона"
-        phone.textAlignment = .center
-        phone.autocapitalizationType = .none
-        return phone
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Номер телефона"
+        txtFld.textAlignment = .center
+        return txtFld
     }()
     
     private(set) var editBtn: UIButton = {
@@ -114,6 +114,8 @@ class MyAnnouncEditVC: UIViewController, UIScrollViewDelegate {
         return btn
     }()
     
+    //MARK: - ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,10 +126,14 @@ class MyAnnouncEditVC: UIViewController, UIScrollViewDelegate {
         self.editBtn.addTarget(self, action: #selector(editBtnTapped), for: .touchUpInside)
         self.deleteBtn.addTarget(self, action: #selector(deleteBtnTapped), for: .touchUpInside)
         
-        self.showPetName()
+        self.showPetNameAtTitle()
+        
         self.initView()
         self.constraints()
+        self.setupHideKeyboardOnTap()
     }
+    
+    //MARK: - Initialization
     
     private func initView() {
         self.view.addSubview(scrollView)
@@ -144,6 +150,66 @@ class MyAnnouncEditVC: UIViewController, UIScrollViewDelegate {
         self.contentView.addSubview(self.deleteBtn)
     }
     
+    //MARK: - @objc functions
+    
+    @objc private func editBtnTapped() {
+        Firestore.firestore().collection("Missing Animals").document(myPetID).updateData([
+            "name": petNameTxtFld.text ?? "",
+            "type": petTypeTxtFld.text ?? "",
+            "breed": petBreedTxtFld.text ?? "",
+            "gender": petGenderTxtFld.text ?? "",
+            "missingAddress": petMissingAdressTxtFld.text ?? "",
+            "additionalInfo": petAdditionalInfoTxtFld.text ?? "",
+            "phone": phoneTxtFld.text ?? "",]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+        let alert = UIAlertController(title: "Изменено успешно", message: nil, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
+    }
+    
+    @objc private func deleteBtnTapped() {
+        Firestore.firestore().collection("Missing Animals").document(myPetID).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                let alert = UIAlertController(title: "Запись удалена успешно", message: nil, preferredStyle: .actionSheet)
+                let action = UIAlertAction(title: "OK", style: .default) { (alert) in
+                    self.dismiss(animated: true, completion: nil)
+                    MyAnnounceVC.shared.tableView.reloadData()
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true)
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
+    //MARK: - Functions
+    
+    private func showPetNameAtTitle() {
+        Firestore.firestore().collection("Missing Animals").document(myPetID)
+            .addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                let petName = data["name"] as? String ?? "Отсутствует"
+                self.navigationItem.title = petName
+            }
+    }
+    
+    //MARK: - Constraints
+
     private func constraints() {
         self.scrollView.snp.makeConstraints {
             $0.edges.equalTo(self.view)
@@ -205,64 +271,9 @@ class MyAnnouncEditVC: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    @objc private func editBtnTapped() {
-        Firestore.firestore().collection("Missing Animals").document(myPetID).updateData([
-            "name": petNameTxtFld.text ?? "",
-            "type": petTypeTxtFld.text ?? "",
-            "breed": petBreedTxtFld.text ?? "",
-            "gender": petGenderTxtFld.text ?? "",
-            "missingAddress": petMissingAdressTxtFld.text ?? "",
-            "additionalInfo": petAdditionalInfoTxtFld.text ?? "",
-            "phone": phoneTxtFld.text ?? "",]) { err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated")
-                }
-            }
-        let alert = UIAlertController(title: "Изменено успешно", message: nil, preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "OK", style: .default)
-        alert.addAction(action)
-        self.present(alert, animated: true)
-    }
-    
-    @objc private func deleteBtnTapped() {
-        Firestore.firestore().collection("Missing Animals").document(myPetID).delete() { err in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                let alert = UIAlertController(title: "Запись удалена успешно", message: nil, preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "OK", style: .default) { (alert) in
-                    self.dismiss(animated: true, completion: nil)
-                    MyAnnounsVC.shared.tableView.reloadData()
-                }
-                alert.addAction(action)
-                self.present(alert, animated: true)
-                print("Document successfully removed!")
-            }
-        }
-    }
-    
-    private func showPetName() {
-        Firestore.firestore().collection("Missing Animals").document(myPetID)
-            .addSnapshotListener { documentSnapshot, error in
-                guard let document = documentSnapshot else {
-                    print("Error fetching document: \(error!)")
-                    return
-                }
-                guard let data = document.data() else {
-                    print("Document data was empty.")
-                    return
-                }
-                let petName = data["name"] as? String ?? "UnidentifiedUser"
-                self.navigationItem.title = petName
-                print("User name = \(petName)")
-            }
-    }
-    
 }
 
-extension MyAnnouncEditVC {
+extension MyAnnounceEditVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

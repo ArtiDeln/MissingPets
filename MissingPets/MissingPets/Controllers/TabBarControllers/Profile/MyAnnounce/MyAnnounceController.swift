@@ -1,5 +1,5 @@
 //
-//  MyAnnounsVC.swift
+//  MyAnnounceVC.swift
 //  MissingPets
 //
 //  Created by Artyom Butorin on 31.05.22.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class MyAnnounsVC: UIViewController {
+class MyAnnounceVC: UIViewController {
 
     //TODO: - Удаление и изменение объявлений
     
-    static let shared = MyAnnounsVC()
+    static let shared = MyAnnounceVC()
     
     private(set) lazy var myPetsData = [MyPetsData]()
     
@@ -72,7 +72,7 @@ class MyAnnounsVC: UIViewController {
     }
 }
 
-extension MyAnnounsVC: UITableViewDelegate, UITableViewDataSource {
+extension MyAnnounceVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myPetsData.count
@@ -85,28 +85,8 @@ extension MyAnnounsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        let rootVC = AboutPetController()
-//        let navVC = UINavigationController(rootViewController: rootVC)
-//
-//        rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад",
-//                                                                  style: .done,
-//                                                                  target: self,
-//                                                                  action: #selector(backBtnTapped))
-//
-//        rootVC.navigationItem.title = "\(self.myPetsData[indexPath.row].petName)"
-//        rootVC.petPhotoImg.image = myPetsData[indexPath.row].petPhoto
-//        rootVC.petBreedLbl.text = "Порода: \(myPetsData[indexPath.row].petBreed)"
-//        rootVC.petGenderLbl.text = "Пол: \(myPetsData[indexPath.row].petGender)"
-//        rootVC.petAdditionalInfo.text = myPetsData[indexPath.row].additionalInfo
-//        rootVC.petMissingAdressLbl.text = "Адрес пропажи: \(myPetsData[indexPath.row].missingAddress)"
-//        rootVC.petTypeLbl.text = myPetsData[indexPath.row].petType
-//        rootVC.number = "\(myPetsData[indexPath.row].phone)"
-//
-//        navVC.modalPresentationStyle = .automatic
-//        present(navVC, animated: true)
-        
-        let rootVC = MyAnnouncEditVC()
+                
+        let rootVC = MyAnnounceEditVC()
         let navVC = UINavigationController(rootViewController: rootVC)
         
         rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад",
@@ -126,7 +106,6 @@ extension MyAnnounsVC: UITableViewDelegate, UITableViewDataSource {
         
         navVC.modalPresentationStyle = .automatic
         present(navVC, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

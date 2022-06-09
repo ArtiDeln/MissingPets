@@ -72,9 +72,6 @@ class ProfileVC: UIViewController {
         self.initView()
         self.constraints()
         self.setName()
-        
-        
-        //        ref = Database.database().reference()
     }
     
     private func initView() {
@@ -87,7 +84,7 @@ class ProfileVC: UIViewController {
     //MARK: - @objc functions
     
     @objc private func myAnnounsTapped() {
-        let vc = MyAnnounsVC()
+        let vc = MyAnnounceVC()
         navigationController?.pushViewController(vc, animated: true)
     }
     

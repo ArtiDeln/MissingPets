@@ -21,19 +21,21 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     }()
     
     private(set) lazy var emailField: UITextField = {
-        let email = UITextField()
-        email.borderStyle = .roundedRect
-        email.placeholder = "Email"
-        email.autocapitalizationType = .none
-        return email
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Email"
+        txtFld.autocapitalizationType = .none
+        return txtFld
     }()
     
     private(set) lazy var passwordField: UITextField = {
-        let password = UITextField()
-        password.borderStyle = .roundedRect
-        password.placeholder = "Пароль"
-        password.isSecureTextEntry = true
-        return password
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Пароль"
+        txtFld.isSecureTextEntry = true
+        return txtFld
     }()
     
     private(set) lazy var logInBtn: UIButton = {

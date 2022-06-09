@@ -16,43 +16,46 @@ class ProfileEditingVC: UIViewController {
     //MARK: - GUI
     
     private(set) lazy var nameField: UITextField = {
-        let name = UITextField()
-        name.borderStyle = .roundedRect
-        name.placeholder = "Имя"
-        name.autocapitalizationType = .none
-        return name
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Имя"
+        return txtFld
     }()
     
     private(set) lazy var emailField: UITextField = {
-        let email = UITextField()
-        email.borderStyle = .roundedRect
-        email.placeholder = "Email"
-        email.autocapitalizationType = .none
-        return email
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Email"
+        txtFld.autocapitalizationType = .none
+        return txtFld
     }()
     
     private(set) lazy var oldPasswordField: UITextField = {
-        let password = UITextField()
-        password.borderStyle = .roundedRect
-        password.placeholder = "Действительный пароль"
-        password.isSecureTextEntry = true
-        return password
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Действительный пароль"
+        txtFld.isSecureTextEntry = true
+        return txtFld
     }()
     
     private(set) lazy var newPasswordField: UITextField = {
-        let password = UITextField()
-        password.borderStyle = .roundedRect
-        password.placeholder = "Новый пароль"
-        password.isSecureTextEntry = true
-        return password
+        let txtFld = UITextField()
+        txtFld.borderStyle = .roundedRect
+        txtFld.clearButtonMode = .whileEditing
+        txtFld.placeholder = "Новый пароль"
+        txtFld.isSecureTextEntry = true
+        return txtFld
     }()
     
     private(set) lazy var saveBtn: UIButton = {
-        let save = UIButton()
-        save.setTitle("Сохранить", for: .normal)
-        save.backgroundColor = .systemBlue
-        save.layer.cornerRadius = 10
-        return save
+        let btn = UIButton()
+        btn.setTitle("Сохранить", for: .normal)
+        btn.backgroundColor = .systemBlue
+        btn.layer.cornerRadius = 10
+        return btn
     }()
     
     //MARK: - ViewDidLoad
@@ -106,11 +109,7 @@ class ProfileEditingVC: UIViewController {
         guard let name = nameField.text, !name.isEmpty,
               let email = emailField.text, !email.isEmpty,
               let password = oldPasswordField.text, !password.isEmpty else {
-            print("Missing field")
-            let alert = UIAlertController(title: "Заполните все поля", message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(action)
-            self.present(alert, animated: true)
+            alert(alertTitle: "Заполните все поля!", alertMessage: nil, alertActionTitle: "OK")
             return
         }
         
@@ -130,7 +129,7 @@ class ProfileEditingVC: UIViewController {
         
         self.updateUserEmailAndPassword()
         
-        let alert = UIAlertController(title: "Изменено успешно", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Изменения сохранены успешно", message: nil, preferredStyle: .actionSheet)
         let action = UIAlertAction(title: "OK", style: .default)
         alert.addAction(action)
         self.present(alert, animated: true)
@@ -141,22 +140,23 @@ class ProfileEditingVC: UIViewController {
         Auth.auth().currentUser?.updateEmail(to: emailField.text!) { error in
             if let error = error {
                 print(error)
-                let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default)
-                alert.addAction(action)
-                self.present(alert, animated: true)
+                self.alert(alertTitle: "Ошибка", alertMessage: "Перезайдите в аккаунт и повторите попытку", alertActionTitle: "OK")
             }
         }
         
         Auth.auth().currentUser?.updatePassword(to: oldPasswordField.text!) { error in
             if let error = error {
                 print(error)
-                let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default)
-                alert.addAction(action)
-                self.present(alert, animated: true)
+                self.alert(alertTitle: "Ошибка", alertMessage: "Перезайдите в аккаунт и повторите попытку", alertActionTitle: "OK")
             }
         }
+    }
+    
+    private func alert(alertTitle: String?, alertMessage: String?, alertActionTitle: String?) {
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let action = UIAlertAction(title: alertActionTitle, style: .default)
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
     
     //MARK: - Constraints
