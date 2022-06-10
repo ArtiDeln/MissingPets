@@ -174,20 +174,34 @@ class MyAnnounceEditVC: UIViewController, UIScrollViewDelegate, UITextFieldDeleg
     }
     
     @objc private func deleteBtnTapped() {
-        Firestore.firestore().collection("Missing Animals").document(myPetID).delete() { err in
-            if let err = err {
-                print("Error removing document: \(err)")
-            } else {
-                let alert = UIAlertController(title: "Запись удалена успешно", message: nil, preferredStyle: .actionSheet)
-                let action = UIAlertAction(title: "OK", style: .default) { (alert) in
-                    self.dismiss(animated: true, completion: nil)
-                    MyAnnounceVC.shared.tableView.reloadData()
+        
+        let alert = UIAlertController(title: "Вы действительно хотите удалить объявление?", message: nil, preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { (alert) in
+            Firestore.firestore().collection("Missing Animals").document(self.myPetID).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    self.showSuccessDeleteAlert()
+                    print("Document successfully removed!")
                 }
-                alert.addAction(action)
-                self.present(alert, animated: true)
-                print("Document successfully removed!")
             }
         }
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+        
+
+    }
+    
+    private func showSuccessDeleteAlert() {
+        let alert = UIAlertController(title: "Запись удалена успешно", message: nil, preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "OK", style: .default) { (alert) in
+            self.dismiss(animated: true, completion: nil)
+            MyAnnounceVC.shared.tableView.reloadData()
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
     
     //MARK: - Functions

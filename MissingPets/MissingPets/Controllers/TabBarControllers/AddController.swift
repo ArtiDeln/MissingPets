@@ -20,7 +20,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
     
     let user = Auth.auth().currentUser
     let status = ["Пропал", "Найден"]
-
+    
     //MARK: - GUI
     
     private(set) lazy var scrollView: UIScrollView = {
@@ -32,7 +32,7 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         let contentView = UIView()
         return contentView
     }()
-            
+    
     private(set) lazy var petImgView: UIImageView = {
         let petPhoto = UIImageView()
         petPhoto.image = UIImage(named: "AddPhotoImage")
@@ -161,9 +161,11 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         case 0: petStatus = "missing"
             phoneNumberTxtFld.placeholder = "Телефон владельца"
             petNicknameTxtFld.placeholder = "Кличка"
+            petMissingAddressTxtFld.placeholder = "Адрес пропажи"
         case 1: petStatus = "founded"
             phoneNumberTxtFld.placeholder = "Телефон нашедшего"
             petNicknameTxtFld.placeholder = "Кличка, если известна"
+            petMissingAddressTxtFld.placeholder = "Адрес обнаружения"
         default: petStatus = "missing"
         }
     }
@@ -195,33 +197,37 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
             switch result {
             case .success(let url):
                 self.photoURL = url.absoluteString
-                print("Записалось \(self.photoURL)")
+        
+                Firestore.firestore().collection("Missing Animals").addDocument(data: ["photo": self.photoURL,
+                                                                                       "name": petNickname,
+                                                                                       "type": petType,
+                                                                                       "breed": petBreed,
+                                                                                       "gender": petGender,
+                                                                                       "missingAddress": petMissingAddress,
+                                                                                       "phone": phoneNumber,
+                                                                                       "additionalInfo": additionalInfo,
+                                                                                       "status": self.petStatus,
+                                                                                       "owner": self.user!.uid,
+                                                                                       "date": Date().toMillis]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        let alert = UIAlertController(title: "Объявление успешно создано", message: nil, preferredStyle: .actionSheet)
+                        let action = UIAlertAction(title: "OK", style: .default)
+                        alert.addAction(action)
+                        self.present(alert, animated: true)
+                        print("Document successfully written!")
+                        self.clearAllItems()
+                    }
+                }
                 
             case .failure:
-                print("error data added")
-                return
-            }
-        }
-        
-        Firestore.firestore().collection("Missing Animals").addDocument(data: ["photo": photoURL,
-                                                                               "name": petNickname,
-                                                                               "type": petType,
-                                                                               "breed": petBreed,
-                                                                               "gender": petGender,
-                                                                               "missingAddress": petMissingAddress,
-                                                                               "phone": phoneNumber,
-                                                                               "additionalInfo": additionalInfo,
-                                                                               "status": self.petStatus,
-                                                                               "owner": self.user!.uid]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                let alert = UIAlertController(title: "Объявление успешно созданно", message: nil, preferredStyle: .actionSheet)
+                let alert = UIAlertController(title: "Ошибка!", message: nil, preferredStyle: .actionSheet)
                 let action = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(action)
                 self.present(alert, animated: true)
-                print("Document successfully written!")
-                self.clearAllItems()
+                print("error data added")
+                return
             }
         }
     }

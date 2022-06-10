@@ -108,10 +108,10 @@
 			children = (
 				9AA4361E283AE60C00E678D3 /* Delegates */,
 				9A1AC6B82835173D009E7BE0 /* Controllers */,
-				9AF0A8E02835591D00B04DBC /* Resources */,
 				9A98E4FD284976A200C97A85 /* Service.swift */,
 				9A98E4F928480C0200C97A85 /* StorageManager.swift */,
 				9A98E4FB28483B3500C97A85 /* Extensions.swift */,
+				9AF0A8E02835591D00B04DBC /* Resources */,
 			);
 			path = MissingPets;
 			sourceTree = "<group>";

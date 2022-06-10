@@ -18,7 +18,7 @@ class Service {
     
     func getMissingPetsData(completion: @escaping ([MissingPetsData]) -> ()) {
         
-        Firestore.firestore().collection("Missing Animals").whereField("status", isEqualTo: "missing").getDocuments { snap, err in
+        Firestore.firestore().collection("Missing Animals").whereField("status", isEqualTo: "missing").order(by: "date", descending: true).getDocuments { snap, err in
             if err == nil {
                 var petList = [MissingPetsData]()
                 if let docs = snap?.documents {
@@ -41,7 +41,7 @@ class Service {
                         let missingAddress = data["missingAddress"] as? String ?? "Неизвестен"
                         let additionalInfo = data["additionalInfo"] as? String ?? "Отсутствует"
                         
-                        petList.append(MissingPetsData(petPhoto: UIImage(data: imgData)!,
+                        petList.append(MissingPetsData(petPhoto: (UIImage(data: imgData) ?? UIImage(named: "AppIcon")!),
                                                        petName: name,
                                                        petBreed: breed,
                                                        petType: type,
@@ -58,7 +58,7 @@ class Service {
     
     func getFoundedPetsData(completion: @escaping ([FoundedPetsData]) -> ()) {
         
-        Firestore.firestore().collection("Missing Animals").whereField("status", isEqualTo: "founded").getDocuments { snap, err in
+        Firestore.firestore().collection("Missing Animals").whereField("status", isEqualTo: "founded").order(by: "date", descending: true).getDocuments { snap, err in
             if err == nil {
                 var petList = [FoundedPetsData]()
                 if let docs = snap?.documents {
@@ -100,7 +100,7 @@ class Service {
         
         let user = Auth.auth().currentUser
 
-        Firestore.firestore().collection("Missing Animals").whereField("owner", isEqualTo: "\(user!.uid)").getDocuments { snap, err in
+        Firestore.firestore().collection("Missing Animals").whereField("owner", isEqualTo: "\(user!.uid)").order(by: "date", descending: true).getDocuments { snap, err in
             if err == nil {
                 var petList = [MyPetsData]()
                 if let docs = snap?.documents {
