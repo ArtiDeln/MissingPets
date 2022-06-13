@@ -112,4 +112,3 @@ extension AddPetVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         picker.dismiss(animated: true, completion: nil)
     }
 }
-

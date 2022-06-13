@@ -65,7 +65,9 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         let txtFld = UITextField()
         txtFld.borderStyle = .roundedRect
         txtFld.clearButtonMode = .whileEditing
-        txtFld.placeholder = "Вид питомца"
+        txtFld.attributedPlaceholder = NSAttributedString(string: "Вид питомца",
+                                                          attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemRed])
+//        txtFld.placeholder = "Вид питомца"
         return txtFld
     }()
     
@@ -89,7 +91,9 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         let txtFld = UITextField()
         txtFld.borderStyle = .roundedRect
         txtFld.clearButtonMode = .whileEditing
-        txtFld.placeholder = "Адрес пропажи"
+        txtFld.attributedPlaceholder = NSAttributedString(string: "Адрес пропажи",
+                                                          attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemRed])
+//        txtFld.placeholder = "Адрес пропажи"
         return txtFld
     }()
     
@@ -97,7 +101,9 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
         let txtFld = UITextField()
         txtFld.borderStyle = .roundedRect
         txtFld.clearButtonMode = .whileEditing
-        txtFld.placeholder = "Телефон владельца"
+        txtFld.attributedPlaceholder = NSAttributedString(string: "Телефон владельца",
+                                                          attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemRed])
+//        txtFld.placeholder = "Телефон владельца"
         txtFld.keyboardType = .numbersAndPunctuation
         return txtFld
     }()
@@ -267,8 +273,8 @@ class AddPetVC: UIViewController, UIScrollViewDelegate {
     }
     
     func errorAlert() {
-        let alertController = UIAlertController(title: "Заполните все поля!",
-                                                message: "Поле доп. информация не обязательна к заполнению",
+        let alertController = UIAlertController(title: "Заполните обязательные поля",
+                                                message: "Обязательные поля выделены красным цветом",
                                                 preferredStyle: .alert)
         let action = UIAlertAction(title: "OK",
                                    style: .default,

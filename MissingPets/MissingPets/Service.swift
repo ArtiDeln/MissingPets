@@ -75,7 +75,7 @@ class Service {
                         }
                         let name = data["name"] as? String ?? "Неизвестна"
                         let phone = data["phone"] as? String ?? "Неизвестен"
-                        let breed = data["breed"] as? String ?? "Неизвестно"
+                        let breed = data["breed"] as? String ?? "Неизвестна"
                         let type = data["type"] as? String ?? "Неизвестен"
                         let gender = data["gender"] as? String ?? "Неизвестен"
                         let missingAddress = data["missingAddress"] as? String ?? "Неизвестен"
@@ -122,7 +122,6 @@ class Service {
                             }
                         }
                         let name = data["name"] as? String ?? "Неизвестна"
-                        print("\(name) == \(docID)")
                         let phone = data["phone"] as? String ?? "Неизвестен"
                         let breed = data["breed"] as? String ?? "Неизвестно"
                         let type = data["type"] as? String ?? "Неизвестен"

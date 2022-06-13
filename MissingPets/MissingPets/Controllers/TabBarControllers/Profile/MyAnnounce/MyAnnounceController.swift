@@ -8,8 +8,6 @@
 import UIKit
 
 class MyAnnounceVC: UIViewController {
-
-    //TODO: - Удаление и изменение объявлений
     
     static let shared = MyAnnounceVC()
     

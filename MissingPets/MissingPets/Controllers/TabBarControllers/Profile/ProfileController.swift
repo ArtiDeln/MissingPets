@@ -17,8 +17,6 @@ class ProfileVC: UIViewController {
     
     //MARK: - Variables
     
-    //    var ref: DatabaseReference!
-    
     //MARK: - GUI
     
     private(set) lazy var nameLbl: UILabel = {
@@ -31,7 +29,6 @@ class ProfileVC: UIViewController {
         button.setTitle("Мои объявления", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
-        //        button.titleLabel?.font = .systemFont(ofSize: 12)
         button.addTarget(self, action: #selector(myAnnounsTapped), for: .touchUpInside)
         return button
     }()
@@ -41,7 +38,6 @@ class ProfileVC: UIViewController {
         button.setTitle("Редактировать профиль", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 10
-        //        button.titleLabel?.font = .systemFont(ofSize: 12)
         button.addTarget(self, action: #selector(profileEditTapped), for: .touchUpInside)
         return button
     }()
@@ -51,7 +47,6 @@ class ProfileVC: UIViewController {
         logOut.setTitle("Выйти", for: .normal)
         logOut.backgroundColor = .systemGray
         logOut.layer.cornerRadius = 10
-        //        logOut.titleLabel?.font = .systemFont(ofSize: 12)
         logOut.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
         return logOut
     }()
@@ -75,10 +70,10 @@ class ProfileVC: UIViewController {
     }
     
     private func initView() {
-        self.view.addSubview(nameLbl)
-        self.view.addSubview(myAnnounsBtn)
-        self.view.addSubview(profileEditBtn)
-        self.view.addSubview(logOutBtn)
+        self.view.addSubview(self.nameLbl)
+        self.view.addSubview(self.myAnnounsBtn)
+        self.view.addSubview(self.profileEditBtn)
+        self.view.addSubview(self.logOutBtn)
     }
     
     //MARK: - @objc functions

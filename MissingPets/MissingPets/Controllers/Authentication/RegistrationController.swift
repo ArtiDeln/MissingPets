@@ -16,13 +16,6 @@ class RegistrationVC: UIViewController {
     
     //MARK: - GUI
         
-    private(set) lazy var registrationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Регистрация"
-        label.font = .boldSystemFont(ofSize: 45)
-        return label
-    }()
-    
     private(set) lazy var nameField: UITextField = {
         let txtFld = UITextField()
         txtFld.borderStyle = .roundedRect
@@ -63,9 +56,11 @@ class RegistrationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.title = "Регистрация"
+        
         self.view.backgroundColor = .systemBackground
         
-        self.view.addSubview(self.registrationLabel)
         self.view.addSubview(self.nameField)
         self.view.addSubview(self.emailField)
         self.view.addSubview(self.passwordField)
@@ -98,7 +93,7 @@ class RegistrationVC: UIViewController {
             }
             
             Firestore.firestore().collection("Users").document(result?.user.uid ?? "Error").setData(["name": name,
-                                                                                        "email": email]) { err in
+                                                                                                     "email": email]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
                 } else {
@@ -120,13 +115,9 @@ class RegistrationVC: UIViewController {
     //MARK: - Constraints
     
     private func constraints() {
-        self.registrationLabel.snp.makeConstraints {
-            $0.centerX.equalTo(self.view)
-            $0.top.equalToSuperview().inset(150)
-        }
         self.nameField.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(50)
-            $0.top.equalTo(registrationLabel.snp.bottom).inset(-15)
+            $0.top.equalToSuperview().inset(170)
         }
         self.emailField.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(50)
