@@ -154,12 +154,12 @@ class MyAnnounceEditVC: UIViewController, UIScrollViewDelegate, UITextFieldDeleg
     
     @objc private func editBtnTapped() {
         Firestore.firestore().collection("Missing Animals").document(myPetID).updateData([
-            "name": petNameTxtFld.text ?? "",
-            "type": petTypeTxtFld.text ?? "",
-            "breed": petBreedTxtFld.text ?? "",
-            "gender": petGenderTxtFld.text ?? "",
-            "missingAddress": petMissingAdressTxtFld.text ?? "",
-            "additionalInfo": petAdditionalInfoTxtFld.text ?? "",
+            "name": petNameTxtFld.text ?? "Неизвестно",
+            "type": petTypeTxtFld.text ?? "Неизвестно",
+            "breed": petBreedTxtFld.text ?? "Неизвестно",
+            "gender": petGenderTxtFld.text ?? "Неизвестно",
+            "missingAddress": petMissingAdressTxtFld.text ?? "Неизвестно",
+            "additionalInfo": petAdditionalInfoTxtFld.text ?? "Отсутствует",
             "phone": phoneTxtFld.text ?? "",]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")

@@ -33,12 +33,12 @@ class Service {
                                 print(error)
                             }
                         }
-                        let name = data["name"] as? String ?? "Неизвестна"
-                        let phone = data["phone"] as? String ?? "Неизвестен"
+                        let name = data["name"] as? String ?? "Неизвестно"
+                        let phone = data["phone"] as? String ?? "Неизвестно"
                         let breed = data["breed"] as? String ?? "Неизвестно"
-                        let type = data["type"] as? String ?? "Неизвестен"
-                        let gender = data["gender"] as? String ?? "Неизвестен"
-                        let missingAddress = data["missingAddress"] as? String ?? "Неизвестен"
+                        let type = data["type"] as? String ?? "Неизвестно"
+                        let gender = data["gender"] as? String ?? "Неизвестно"
+                        let missingAddress = data["missingAddress"] as? String ?? "Неизвестно"
                         let additionalInfo = data["additionalInfo"] as? String ?? "Отсутствует"
                         
                         petList.append(MissingPetsData(petPhoto: (UIImage(data: imgData) ?? UIImage(named: "AppIcon")!),
@@ -73,12 +73,12 @@ class Service {
                                 print(error)
                             }
                         }
-                        let name = data["name"] as? String ?? "Неизвестна"
-                        let phone = data["phone"] as? String ?? "Неизвестен"
-                        let breed = data["breed"] as? String ?? "Неизвестна"
-                        let type = data["type"] as? String ?? "Неизвестен"
-                        let gender = data["gender"] as? String ?? "Неизвестен"
-                        let missingAddress = data["missingAddress"] as? String ?? "Неизвестен"
+                        let name = data["name"] as? String ?? "Неизвестно"
+                        let phone = data["phone"] as? String ?? "Неизвестно"
+                        let breed = data["breed"] as? String ?? "Неизвестно"
+                        let type = data["type"] as? String ?? "Неизвестно"
+                        let gender = data["gender"] as? String ?? "Неизвестно"
+                        let missingAddress = data["missingAddress"] as? String ?? "Неизвестно"
                         let additionalInfo = data["additionalInfo"] as? String ?? "Отсутствует"
                         
                         petList.append(FoundedPetsData(petPhoto: UIImage(data: imgData)!,
