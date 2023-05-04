@@ -2,6 +2,8 @@
 
 Lost Pet Finder Help App
 
+> Firebase is currently disabled
+
 ![1](Info/1.png)
 ![2](Info/2.png)
 ![3](Info/3.png)
